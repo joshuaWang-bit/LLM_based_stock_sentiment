@@ -1,0 +1,141 @@
+{
+  "date": "2025-01-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.8,
+      "label": "看好",
+      "summary": "皖能电力近期利好消息频出，机构调研频繁，多家券商给予买入评级，预计2025年发电量继续增长，2024年净利润大幅增长，市场整体情绪偏积极乐观。",
+      "market_expectation": "市场对皖能电力未来发展预期良好，股价有上涨潜力。",
+      "confidence_index": 0.85
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-24",
+          "score": 0.9,
+          "key_events": [
+            "多家机构调研皖能电力",
+            "80股获机构买入评级，皖能电力在列",
+            "皖能电力预计2025年发电量继续增长"
+          ]
+        },
+        {
+          "date": "2025-01-23",
+          "score": 0.7,
+          "key_events": [
+            "67股获机构买入评级，皖能电力在列",
+            "皖能电力发布2024年度业绩预告，净利润大幅增长"
+          ]
+        },
+        {
+          "date": "2025-01-22",
+          "score": 0.7,
+          "key_events": [
+            "皖能电力发布2024年度业绩预告，净利润大幅增长"
+          ]
+        },
+        {
+          "date": "2025-01-19",
+          "score": 0.6,
+          "key_events": [
+            "券商评级显示皖能电力预期涨幅达47.78%"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内皖能电力股价可能上涨，但需关注市场整体波动和行业政策变化。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.9,
+        "summary": "皖能电力2025年发电量预计继续增长，煤电机组全部盈利，在建机组即将投产，公司运营状况良好。",
+        "key_points": [
+          "发电量增长",
+          "煤电机组盈利",
+          "新机组投产"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.9,
+        "summary": "皖能电力2024年业绩预告显示净利润大幅增长，同比增长39.91%-57.4%。",
+        "key_points": [
+          "净利润大幅增长",
+          "业绩预告"
+        ]
+      },
+      "market_competition": {
+        "score": 0.5,
+        "summary": "新闻未提及皖能电力与市场竞争对手的具体情况。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.5,
+        "summary": "新闻未提及皖能电力产品技术方面的具体信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.5,
+        "summary": "新闻未提及与行业政策相关的具体信息。",
+        "key_points": []
+      },
+      "capital_market": {
+        "score": 0.9,
+        "summary": "多家机构调研，多家券商给予买入评级，市场对其未来表现看好。",
+        "key_points": [
+          "机构调研",
+          "券商买入评级",
+          "预期涨幅"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.9,
+        "summary": "证券时报网、每日经济新闻等主流媒体报道了皖能电力的积极消息，提升了信息的可信度。"
+      },
+      "industry_media": {
+        "score": 0.7,
+        "summary": "新闻来源中部分来自行业网站，信息可靠性中等。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "未发现来自自媒体的新闻。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "皖能电力官方发布的业绩预告是重要的信息来源，可信度最高。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "高",
+      "market_impact": {
+        "score": 0.8,
+        "duration": "短期至中期",
+        "key_factors": [
+          "业绩增长",
+          "机构看好",
+          "买入评级"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "宏观经济波动",
+          "description": "宏观经济下行可能影响电力需求和公司业绩。",
+          "severity": "中"
+        },
+        {
+          "factor": "政策变化",
+          "description": "能源政策变化可能对公司发展产生影响。",
+          "severity": "中"
+        },
+        {
+          "factor": "市场风险",
+          "description": "股市波动可能导致股价下跌。",
+          "severity": "低"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "date": "2025-01-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.5,
+      "label": "看好",
+      "summary": "深纺织A发布2024年业绩预告，净利润同比增长0.92%-29.94%，虽然增幅区间较大，但总体向好。中信证券看好纺织服装行业龙头公司，利好深纺织A。行业政策也支持纺织行业发展。",
+      "market_expectation": "市场对深纺织A的2024年业绩表现预期较为乐观，但增幅存在不确定性。",
+      "confidence_index": 0.8
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-21",
+          "score": 0.7,
+          "key_events": [
+            "工信部发布利好纺织行业政策"
+          ]
+        },
+        {
+          "date": "2025-01-22",
+          "score": 0.8,
+          "key_events": [
+            "中信证券发布研报，看好纺织服装行业龙头公司"
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "score": 0.6,
+          "key_events": [
+            "深纺织A发布2024年业绩预告，净利润同比增长0.92%-29.94%；股东大会公告"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内市场情绪整体乐观，但需关注业绩预告中增幅区间的较大波动，以及宏观经济环境的影响。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.6,
+        "summary": "深纺织A即将召开股东大会，表明公司运营正常，并积极进行信息披露。",
+        "key_points": [
+          "股东大会召开",
+          "业绩预告发布"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.7,
+        "summary": "深纺织A预计2024年净利润同比增长，但增幅区间较大，存在一定的不确定性。",
+        "key_points": [
+          "净利润同比增长0.92%-29.94%",
+          "基本每股收益0.1579元~0.2033元"
+        ]
+      },
+      "market_competition": {
+        "score": 0.5,
+        "summary": "新闻未直接提及市场竞争情况，但中信证券看好纺织服装行业龙头公司，暗示深纺织A在行业内具有一定竞争力。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.0,
+        "summary": "新闻未提及深纺织A的产品技术相关信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.7,
+        "summary": "工信部将制定纺织行业数字化转型实施方案等政策，利好纺织行业发展。",
+        "key_points": [
+          "纺织行业数字化转型",
+          "消费品以旧换新政策"
+        ]
+      },
+      "capital_market": {
+        "score": 0.6,
+        "summary": "多家证券公司关注纺织服装行业，深纺织A股票交易活跃。",
+        "key_points": [
+          "中信证券研报",
+          "龙虎榜数据显示资金流入"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.9,
+        "summary": "主流媒体对深纺织A业绩预告进行了报道，信息较为全面。"
+      },
+      "industry_media": {
+        "score": 0.7,
+        "summary": "行业媒体关注度较高，但信息相对集中在业绩预告方面。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "未发现相关自媒体报道。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "深纺织A发布的业绩预告为官方信息，可靠性最高。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.6,
+        "duration": "短期",
+        "key_factors": [
+          "业绩预告",
+          "行业政策",
+          "机构研报"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "业绩预告增幅区间较大",
+          "description": "业绩预告净利润增幅区间为0.92%-29.94%，波动较大，存在一定的不确定性。",
+          "severity": "中"
+        },
+        {
+          "factor": "宏观经济环境变化",
+          "description": "宏观经济环境变化可能影响纺织行业发展，进而影响深纺织A的业绩。",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}

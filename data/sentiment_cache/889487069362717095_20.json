@@ -1,0 +1,119 @@
+{
+  "date": "2025-01-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.8,
+      "label": "看好",
+      "summary": "永安药业2024年预计扭亏为盈，净利润显著增长，多家主流媒体报道，市场反应积极。但需关注扣非净利润及具体盈利来源。",
+      "market_expectation": "市场预期积极，投资者对永安药业的未来发展抱有信心，股价可能出现上涨。",
+      "confidence_index": 0.85
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-21",
+          "score": -0.2,
+          "key_events": [
+            "石墨电极概念股下跌，永安药业股价微跌"
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "score": 0.9,
+          "key_events": [
+            "永安药业发布2024年业绩预告，预计扭亏为盈，多家媒体报道"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内，受业绩预告利好影响，股价可能上涨；长期趋势需进一步观察公司盈利能力的持续性及行业发展情况。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.8,
+        "summary": "业绩预告显示公司经营状况好转，扭亏为盈，这表明公司运营效率和管理能力得到提升。",
+        "key_points": [
+          "扭亏为盈",
+          "经营状况好转"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.9,
+        "summary": "2024年预计实现归母净利润5237.37万元-6802.57万元，扣非净利润1982.52万元-2912.59万元，同比大幅增长，财务状况显著改善。",
+        "key_points": [
+          "归母净利润增长",
+          "扣非净利润增长",
+          "扭亏为盈",
+          "基本每股收益为正"
+        ]
+      },
+      "market_competition": {
+        "score": 0.0,
+        "summary": "新闻未提及公司市场竞争情况。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.0,
+        "summary": "新闻未提及公司产品技术相关信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.0,
+        "summary": "新闻未提及行业政策相关信息。",
+        "key_points": []
+      },
+      "capital_market": {
+        "score": 0.7,
+        "summary": "多家媒体报道了业绩预告，表明资本市场对永安药业的关注度较高。",
+        "key_points": [
+          "多家媒体报道",
+          "业绩预告"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.9,
+        "summary": "新京报、中国证券报、每日经济新闻等主流媒体均报道了永安药业扭亏为盈的消息，增强了信息的可靠性。"
+      },
+      "industry_media": {
+        "score": 0.0,
+        "summary": "没有发现行业媒体的报道。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "没有发现自媒体的报道。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "永安药业官方发布的业绩预告是分析的主要依据，具有最高的可靠性。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "高",
+      "market_impact": {
+        "score": 0.7,
+        "duration": "短期至中期",
+        "key_factors": [
+          "扭亏为盈的业绩预告",
+          "主流媒体的广泛报道",
+          "投资者信心提升"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "扣非净利润较低",
+          "description": "扣非净利润远低于归母净利润，需关注非经常性损益的影响。",
+          "severity": "中"
+        },
+        {
+          "factor": "行业竞争激烈",
+          "description": "医药行业竞争激烈，公司未来盈利能力仍存在不确定性。",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}

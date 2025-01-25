@@ -31,7 +31,19 @@
         </div>
       </div>
     </div>
-    <v-chart class="h-full w-full" :option="chartOption" :autoresize="true" @rendered="onChartRendered" />
+    <!-- Main Gauge -->
+    <div class="relative h-full">
+      <v-chart class="h-full w-full" :option="chartOption" :autoresize="true" @rendered="onChartRendered" />
+      <!-- Extreme Labels -->
+      <div class="absolute bottom-[15%] left-[10%] text-xs px-2 py-1">极负面</div>
+      <div class="absolute bottom-[15%] right-[10%] text-xs px-2 py-1">极正面</div>
+
+      <!-- Confidence Gauge -->
+      <div class="absolute top-2 right-2 w-20 h-20">
+        <v-chart class="h-full w-full" :option="confidenceChartOption" :autoresize="true" />
+        <div class="absolute top-14 left-0 w-full text-center text-xs">置信度</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -90,8 +102,8 @@ const normalizedScore = computed(() => {
     valid: !isNaN(value),
     type: typeof props.score
   })
-  // 后端返回的分数已经是 -1 到 1 的范围，不需要转换
-  const normalizedValue = isNaN(value) ? 0 : value
+  // 将0-1范围转换为-1到1范围
+  const normalizedValue = isNaN(value) ? 0 : (value * 2 - 1)
   console.log('[MainGauge] Final normalized score:', normalizedValue)
   return Math.max(-1, Math.min(1, normalizedValue))
 })
@@ -200,13 +212,11 @@ const chartOption = computed(() => {
         },
         axisLabel: {
           color: '#fff',
-          fontSize: 16,
-          distance: -60,
+          fontSize: 12,
+          distance: -55,
           formatter: function (value) {
-            if (value === -1) return '极负面'
             if (value === 0) return '中性'
-            if (value === 1) return '极正面'
-            return ''
+            return ''  // 不显示极值标签
           }
         },
         title: {
@@ -216,17 +226,23 @@ const chartOption = computed(() => {
         },
         detail: {
           fontSize: 30,
-          offsetCenter: [0, '0%'],
+          offsetCenter: [0, '20%'],
           valueAnimation: true,
           formatter: function (value) {
-            // 将 -1 到 1 的范围转换为百分比显示
             const percentage = Math.round((value + 1) * 50)
             return percentage + '%'
           },
-          color: 'inherit'
+          color: 'inherit',
+          rich: {
+            value: {
+              fontSize: 36,
+              fontWeight: 'bold',
+              padding: [10, 0]
+            }
+          }
         },
         data: [{
-          value: score,
+          value: score,  // 使用转换后的分数
           name: '情感得分'
         }]
       },
@@ -236,14 +252,17 @@ const chartOption = computed(() => {
         endAngle: 0,
         center: ['50%', '75%'],
         radius: '70%',
-        min: 0,
-        max: 100,
+        min: -1,
+        max: 1,
         itemStyle: {
           color: '#7B42FF'
         },
         progress: {
           show: true,
-          width: 8
+          width: 8,
+          itemStyle: {
+            color: '#7B42FF'
+          }
         },
         pointer: {
           show: false
@@ -267,12 +286,90 @@ const chartOption = computed(() => {
           show: false
         },
         data: [{
-          value: confidence * 100,
-          name: '置信度'
+          value: score,
+          name: '进度'
         }]
       }
     ]
   }
+})
+
+// Add confidence gauge option
+const confidenceChartOption = computed(() => {
+  return {
+    backgroundColor: 'transparent',
+    series: [{
+      type: 'gauge',
+      startAngle: 180,
+      endAngle: 0,
+      min: 0,
+      max: 1,
+      splitNumber: 2,
+      axisLine: {
+        lineStyle: {
+          width: 4,
+          color: [
+            [0.3, '#FF3860'],  // 低置信度
+            [0.7, '#FFD700'],  // 中等置信度
+            [1, '#39FF14']     // 高置信度
+          ]
+        }
+      },
+      pointer: {
+        itemStyle: {
+          color: 'inherit'
+        }
+      },
+      axisTick: {
+        distance: -12,
+        length: 4,
+        lineStyle: {
+          color: '#fff',
+          width: 1
+        }
+      },
+      splitLine: {
+        distance: -12,
+        length: 8,
+        lineStyle: {
+          color: '#fff',
+          width: 2
+        }
+      },
+      axisLabel: {
+        color: '#fff',
+        distance: 10,
+        fontSize: 10,
+        formatter: function (value) {
+          if (value === 0) return '0'
+          if (value === 0.5) return '0.5'  // 中间值不显示
+          if (value === 1) return '1'
+          return ''
+        }
+      },
+      detail: {
+        valueAnimation: true,
+        formatter: '{value}',
+        color: '#fff',
+        fontSize: 12,
+        offsetCenter: [0, '40%']
+      },
+      data: [{
+        value: normalizedConfidence.value,
+        name: ''
+      }]
+    }]
+  }
+})
+
+// Add sentiment type computed property
+const sentimentType = computed(() => {
+  const score = normalizedScore.value
+  if (score >= 0.7) return '极度正面'
+  if (score >= 0.3) return '正面'
+  if (score >= -0.3) return '中性'
+  if (score >= -0.7) return '负面'
+  return '极度负面'
 })
 </script>
 

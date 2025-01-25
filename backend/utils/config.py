@@ -83,7 +83,7 @@ class Config:
 请按照以下JSON格式返回分析结果：
 {{
     "overall_sentiment": {{
-        "score": 0.0,  # 情感得分，范围-1到1
+        "score": 0.0,  # 情感得分，范围0到1
         "label": "string",  # 情感标签：极度看好/看好/中性/看空/极度看空
         "summary": "string",  # 整体分析总结，100字以内
         "market_expectation": "string",  # 市场预期分析

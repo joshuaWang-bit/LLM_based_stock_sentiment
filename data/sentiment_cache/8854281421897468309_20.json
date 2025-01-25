@@ -1,0 +1,110 @@
+{
+  "date": "2025-01-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.8,
+      "label": "看好",
+      "summary": "安妮股份2024年预计扭亏为盈，净利润达2500万-3200万元，这对于此前持续亏损的公司而言是积极的信号，市场反应可能较为正面。但盈利规模相对较小，需关注其持续盈利能力。",
+      "market_expectation": "市场预期较为乐观，但仍需观察公司后续的经营状况和业绩表现来进一步确认。",
+      "confidence_index": 0.9
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-24",
+          "score": 0.8,
+          "key_events": [
+            "安妮股份发布2024年度业绩预告，预计扭亏为盈"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内市场情绪可能保持乐观，但长期趋势取决于公司后续的业绩表现以及行业发展情况。需要持续关注公司后续的公告和新闻报道。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.7,
+        "summary": "业绩预告显示公司经营状况好转，扭亏为盈，但具体经营细节需进一步披露。",
+        "key_points": [
+          "扭亏为盈",
+          "经营状况好转"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.8,
+        "summary": "2024年预计净利润2500万-3200万元，同比扭亏为盈，每股收益显著提升。",
+        "key_points": [
+          "净利润2500万-3200万元",
+          "同比扭亏为盈",
+          "每股收益提升"
+        ]
+      },
+      "market_competition": {
+        "score": 0.0,
+        "summary": "新闻未提及市场竞争情况。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.0,
+        "summary": "新闻未提及产品技术相关信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.0,
+        "summary": "新闻未提及行业政策相关信息。",
+        "key_points": []
+      },
+      "capital_market": {
+        "score": 0.7,
+        "summary": "公司发布业绩预告，预示着公司在资本市场上的积极转变。",
+        "key_points": [
+          "业绩预告",
+          "扭亏为盈"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.9,
+        "summary": "每日经济新闻和中国证券报均报道了安妮股份的业绩预告，信息来源可靠。"
+      },
+      "industry_media": {
+        "score": 0.0,
+        "summary": "新闻中未发现来自行业媒体的报道。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "新闻中未发现来自自媒体的报道。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "业绩预告为公司官方发布，信息准确性最高。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.6,
+        "duration": "短期",
+        "key_factors": [
+          "扭亏为盈",
+          "市场情绪变化"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "盈利能力持续性",
+          "description": "2024年盈利规模较小，未来盈利能力仍需进一步观察。",
+          "severity": "中"
+        },
+        {
+          "factor": "行业竞争",
+          "description": "新闻未提及行业竞争情况，未来可能面临竞争压力。",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}
