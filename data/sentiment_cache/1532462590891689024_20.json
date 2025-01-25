@@ -1,0 +1,148 @@
+{
+  "date": "2025-01-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.8,
+      "label": "看好",
+      "summary": "计算机行业整体表现强劲，网宿科技等个股受豆包AI概念及主力资金流入影响大幅上涨，市场情绪积极乐观。地方两会利好消息进一步增强市场信心。",
+      "market_expectation": "短期内计算机行业及相关个股有望继续上涨，但需关注市场波动风险。"
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-21",
+          "score": 0.2,
+          "key_events": [
+            "网宿科技公告增值电信业务经营许可证完成续期，但当日股价小幅上涨，市场反应较为平淡。"
+          ]
+        },
+        {
+          "date": "2025-01-22",
+          "score": 0.5,
+          "key_events": [
+            "液冷服务器概念股上涨，网宿科技参与其中。"
+          ]
+        },
+        {
+          "date": "2025-01-23",
+          "score": 0.7,
+          "key_events": [
+            "多只ETF包含网宿科技，表现强劲；网宿科技受多家媒体报道，股价上涨显著，市场反应积极。"
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "score": 0.9,
+          "key_events": [
+            "豆包AI概念推动网宿科技等个股大幅上涨；计算机行业整体上涨，主力资金净流入显著；地方两会释放积极信号。"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内受豆包AI概念及市场整体向好情绪影响，网宿科技等个股可能延续上涨趋势，但需警惕获利盘出货风险。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.6,
+        "summary": "网宿科技增值电信业务经营许可证续期，保障公司长期运营，利好公司发展。",
+        "key_points": [
+          "许可证续期",
+          "公司运营稳定"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.5,
+        "summary": "豆包AI大模型降价后仍保持正毛利率，表明技术实力和成本控制能力较强，对相关公司例如网宿科技是利好。",
+        "key_points": [
+          "豆包AI毛利率",
+          "成本控制"
+        ]
+      },
+      "market_competition": {
+        "score": 0.4,
+        "summary": "网宿科技在数据中心和AI相关领域面临激烈竞争，但其在技术和市场份额方面具有一定优势。",
+        "key_points": [
+          "行业竞争激烈",
+          "技术优势",
+          "市场份额"
+        ]
+      },
+      "product_technology": {
+        "score": 0.9,
+        "summary": "豆包AI大模型技术进步及应用前景广阔，网宿科技作为相关受益企业，受此利好影响显著。",
+        "key_points": [
+          "豆包AI大模型",
+          "技术进步",
+          "应用前景"
+        ]
+      },
+      "industry_policy": {
+        "score": 0.7,
+        "summary": "地方两会积极信号及国家推动中长期资金入市，为计算机行业发展创造了良好的政策环境。",
+        "key_points": [
+          "地方两会",
+          "中长期资金入市",
+          "政策利好"
+        ]
+      },
+      "capital_market": {
+        "score": 0.8,
+        "summary": "主力资金持续流入计算机行业，多个ETF表现强劲，表明市场对该行业及相关个股的看好。",
+        "key_points": [
+          "主力资金流入",
+          "ETF上涨",
+          "市场信心"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.7,
+        "summary": "主流媒体报道较为客观，对市场行情和政策利好进行了综合分析。"
+      },
+      "industry_media": {
+        "score": 0.8,
+        "summary": "行业媒体报道较为深入，对技术发展和市场竞争态势进行了详细分析。"
+      },
+      "self_media": {
+        "score": 0.5,
+        "summary": "自媒体信息相对碎片化，需谨慎甄别。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "官方公告信息准确可靠，对公司经营状况提供了直接证据。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "高",
+      "market_impact": {
+        "score": 0.8,
+        "duration": "短期(1-3周)",
+        "key_factors": [
+          "豆包AI概念",
+          "主力资金流入",
+          "政策利好"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "市场波动风险",
+          "description": "股市存在 inherent 波动性，可能导致短期内股价下跌。",
+          "severity": "中"
+        },
+        {
+          "factor": "概念炒作风险",
+          "description": "豆包AI概念炒作可能存在风险，股价可能出现回调。",
+          "severity": "中"
+        },
+        {
+          "factor": "竞争风险",
+          "description": "行业竞争激烈，网宿科技的市场份额和盈利能力可能受到影响。",
+          "severity": "低"
+        }
+      ]
+    }
+  }
+}

@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 from backend.utils.config import Config
 from backend.utils.gemini_utils import GeminiClient
+import math
 
 
 class SentimentAnalyzer:
@@ -302,6 +303,84 @@ class SentimentAnalyzer:
             analysis_result = self._analyze_by_keywords(news_to_analyze)
             return self._format_response(analysis_result, news_to_analyze)
 
+    def _calculate_confidence_index(self, news_list: List[Dict], analysis_result: Dict) -> float:
+        """计算置信度指数
+
+        基于以下因素计算：
+        1. 新闻来源的可靠性
+        2. 新闻的时效性
+        3. 情感倾向的一致性
+
+        Returns:
+            float: 0-1之间的置信度指数
+        """
+        if not news_list:
+            return 0.0
+
+        # 1. 计算来源可靠性得分
+        source_weights = {
+            'official_announcement': 1.0,  # 官方公告
+            'mainstream_media': 0.8,       # 主流媒体
+            'industry_media': 0.6,         # 行业媒体
+            'self_media': 0.4              # 自媒体
+        }
+
+        source_scores = []
+        for news in news_list:
+            source_type = 'self_media'  # 默认为自媒体
+            if '公告' in news['source'] or '互动易' in news['source']:
+                source_type = 'official_announcement'
+            elif any(media in news['source'] for media in ['新闻', '日报', '时报']):
+                source_type = 'mainstream_media'
+            elif any(media in news['source'] for media in ['证券', '财经', '金融']):
+                source_type = 'industry_media'
+            source_scores.append(source_weights[source_type])
+
+        source_reliability = sum(source_scores) / len(source_scores)
+
+        # 2. 计算时效性得分
+        current_time = datetime.now()
+        time_scores = []
+        for news in news_list:
+            news_time = datetime.strptime(
+                news['publish_time'], '%Y-%m-%d %H:%M:%S')
+            days_diff = (current_time - news_time).days
+            # 使用指数衰减，7天以内的新闻时效性较高
+            time_score = max(0.2, min(1.0, math.exp(-days_diff / 7)))
+            time_scores.append(time_score)
+
+        timeliness = sum(time_scores) / len(time_scores)
+
+        # 3. 计算情感一致性得分
+        sentiment_scores = []
+        overall_score = analysis_result['overall_sentiment']['score']
+
+        # 从time_analysis中获取每条新闻的情感分数
+        if 'time_analysis' in analysis_result and 'trend' in analysis_result['time_analysis']:
+            for trend in analysis_result['time_analysis']['trend']:
+                if 'score' in trend:
+                    sentiment_scores.append(trend['score'])
+
+        if sentiment_scores:
+            # 计算情感分数的标准差，标准差越小表示一致性越高
+            mean_score = sum(sentiment_scores) / len(sentiment_scores)
+            variance = sum((score - mean_score) **
+                           2 for score in sentiment_scores) / len(sentiment_scores)
+            std_dev = math.sqrt(variance)
+            # 将标准差映射到0-1区间，标准差越小，一致性得分越高
+            consistency = max(0.0, min(1.0, 1 - std_dev))
+        else:
+            consistency = 0.5  # 如果没有足够的数据，给一个中等的一致性分数
+
+        # 综合计算置信度，给予不同因素不同的权重
+        confidence_index = (
+            0.4 * source_reliability +  # 来源可靠性占40%
+            0.3 * timeliness +         # 时效性占30%
+            0.3 * consistency          # 一致性占30%
+        )
+
+        return round(confidence_index, 2)
+
     def _format_response(self, analysis_result: Dict, news_list: List[Dict]) -> Dict:
         """格式化API响应"""
         print("开始格式化响应...")
@@ -311,8 +390,8 @@ class SentimentAnalyzer:
 
         try:
             # 获取分析时间范围
-            dates = [datetime.strptime(news['publish_time'], '%Y-%m-%d %H:%M:%S')
-                     for news in news_list]
+            dates = [datetime.strptime(
+                news['publish_time'], '%Y-%m-%d %H:%M:%S') for news in news_list]
             start_date = min(dates) if dates else None
             end_date = max(dates) if dates else None
 
@@ -326,6 +405,17 @@ class SentimentAnalyzer:
                 raise ValueError(
                     "Missing overall_sentiment in analysis_result")
 
+            # 从LLM响应中获取置信度指数
+            confidence_index = analysis_result['overall_sentiment'].get(
+                'confidence_index')
+            print(f"从LLM获取的置信度指数: {confidence_index}")
+
+            # 如果LLM没有返回置信度指数，则计算一个
+            if confidence_index is None:
+                confidence_index = self._calculate_confidence_index(
+                    news_list, analysis_result)
+                print(f"计算得到的置信度指数: {confidence_index}")
+
             formatted_response = {
                 'analysis_summary': {
                     'overall_score': analysis_result['overall_sentiment']['score'],
@@ -335,7 +425,8 @@ class SentimentAnalyzer:
                     'analysis_period': {
                         'start_date': start_date.strftime('%Y-%m-%d') if start_date else None,
                         'end_date': end_date.strftime('%Y-%m-%d') if end_date else None
-                    }
+                    },
+                    'confidence_index': confidence_index  # 使用获取到的或计算的置信度
                 },
                 'time_analysis': analysis_result.get('time_analysis', {
                     'trend': [],
@@ -387,7 +478,8 @@ class SentimentAnalyzer:
                     'analysis_period': {
                         'start_date': None,
                         'end_date': None
-                    }
+                    },
+                    'confidence_index': 0.0
                 },
                 'time_analysis': {
                     'trend': [],

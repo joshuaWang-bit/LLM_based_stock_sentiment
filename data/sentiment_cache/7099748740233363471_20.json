@@ -1,0 +1,148 @@
+{
+  "date": "2025-01-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.2,
+      "label": "看好",
+      "summary": "金信诺2024年业绩预告显示扭亏为盈，虽然盈利幅度较小，但结合其在铜缆高速连接概念的市场表现和资金流入情况，市场情绪整体偏向乐观。",
+      "market_expectation": "市场预期金信诺未来业绩将持续改善，但仍需关注其盈利能力的稳定性。"
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-20",
+          "score": 0.8,
+          "key_events": [
+            "股价大幅上涨，主力资金大量流入",
+            "被多个概念板块收录，例如：铜缆高速连接、PCB、WiFi 6、富士康概念等"
+          ]
+        },
+        {
+          "date": "2025-01-21",
+          "score": 0.1,
+          "key_events": [
+            "股价小幅下跌，主力资金净流出"
+          ]
+        },
+        {
+          "date": "2025-01-22",
+          "score": 0.7,
+          "key_events": [
+            "股价上涨，主力资金净流入",
+            "铜缆高速连接概念板块持续走强"
+          ]
+        },
+        {
+          "date": "2025-01-23",
+          "score": 0.6,
+          "key_events": [
+            "股价跟涨",
+            "铜缆高速连接概念持续走强"
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "score": 0.3,
+          "key_events": [
+            "发布2024年业绩预告，预计扭亏为盈，但盈利金额较少，扣非净利润仍为亏损；资金净流出"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内受铜缆高速连接概念和业绩预告影响，股价波动较大，但长期走势仍需观察其盈利能力的持续性及行业发展趋势。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.5,
+        "summary": "新闻提及金信诺扭亏为盈，但盈利金额较小，公司经营状况仍需进一步观察。",
+        "key_points": [
+          "扭亏为盈",
+          "盈利金额较小",
+          "扣非净利润仍为亏损"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.3,
+        "summary": "2024年预计归母净利润0-3000万元，同比扭亏，但扣非净利润仍为亏损，财务状况有待改善。",
+        "key_points": [
+          "扭亏为盈",
+          "盈利金额较小",
+          "扣非净利润亏损"
+        ]
+      },
+      "market_competition": {
+        "score": 0.4,
+        "summary": "金信诺参与铜缆高速连接器市场竞争，与华脉科技等公司同属一个概念板块，竞争激烈。",
+        "key_points": [
+          "铜缆高速连接概念",
+          "与其他公司竞争"
+        ]
+      },
+      "product_technology": {
+        "score": 0.6,
+        "summary": "金信诺的产品应用于铜缆高速连接领域，受市场关注。",
+        "key_points": [
+          "铜缆高速连接",
+          "相关产品技术"
+        ]
+      },
+      "industry_policy": {
+        "score": 0.1,
+        "summary": "新闻未提及与行业政策相关的具体内容。",
+        "key_points": []
+      },
+      "capital_market": {
+        "score": 0.7,
+        "summary": "金信诺股票在多个概念板块中活跃，资金流入流出情况波动较大。",
+        "key_points": [
+          "资金流入流出",
+          "概念板块表现"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.8,
+        "summary": "主流媒体报道了金信诺的业绩预告和市场表现，信息较为全面和客观。"
+      },
+      "industry_media": {
+        "score": 0.7,
+        "summary": "行业媒体报道了金信诺在铜缆高速连接领域的竞争情况和市场动态。"
+      },
+      "self_media": {
+        "score": 0.5,
+        "summary": "新闻中未明显体现自媒体观点。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "金信诺官方发布的业绩预告是分析的重要依据。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.6,
+        "duration": "短期",
+        "key_factors": [
+          "业绩预告",
+          "铜缆高速连接概念",
+          "资金流向"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "盈利能力",
+          "description": "虽然扭亏为盈，但盈利金额较小，扣非净利润仍为亏损，盈利能力有待进一步验证。",
+          "severity": "中"
+        },
+        {
+          "factor": "市场竞争",
+          "description": "铜缆高速连接器市场竞争激烈，金信诺能否保持竞争优势存在不确定性。",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}
