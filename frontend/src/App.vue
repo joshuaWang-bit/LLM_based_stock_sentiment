@@ -8,9 +8,33 @@ import MainGauge from './components/SentimentDashboard/MainGauge.vue'
 const searchQuery = ref('')
 const store = useStockStore()
 
+// Debug computed properties
+const debugInfo = computed(() => ({
+  currentStock: store.currentStock,
+  storeDebugState: store.debugState,
+  sentimentScore: store.sentimentScore,
+  confidenceIndex: store.confidenceIndex,
+  lastUpdated: store.lastUpdated,
+  hasError: !!store.error,
+  error: store.error
+}))
+
 // 计算属性
+const sentimentScore = computed(() => {
+  const score = store.sentimentScore
+  console.log('[App] Computing sentiment score:', score)
+  return score
+})
+
+const confidenceIndex = computed(() => {
+  const confidence = store.confidenceIndex
+  console.log('[App] Computing confidence index:', confidence)
+  return confidence
+})
+
 const sentimentType = computed(() => {
-  const score = store.analysisData?.overall_sentiment?.score || 0
+  const score = sentimentScore.value
+  console.log('[App] Computing sentiment type for score:', score)
   if (score > 0.5) return 'success'
   if (score > 0) return ''
   if (score > -0.5) return 'warning'
@@ -18,7 +42,7 @@ const sentimentType = computed(() => {
 })
 
 const sentimentLabel = computed(() => {
-  const score = store.analysisData?.overall_sentiment?.score || 0
+  const score = store.analysisData?.analysis_summary?.overall_score || 0
   if (score > 0.5) return '极度正面'
   if (score > 0) return '偏正面'
   if (score > -0.5) return '偏负面'
@@ -26,7 +50,7 @@ const sentimentLabel = computed(() => {
 })
 
 const marketExpectationColor = computed(() => {
-  const score = store.analysisData?.overall_sentiment?.market_expectation_strength || 0
+  const score = store.analysisData?.analysis_summary?.market_expectation || 0
   if (score > 50) return 'text-quantum'
   if (score > 0) return 'text-primary'
   if (score > -50) return 'text-sentiment-neutral'
@@ -34,7 +58,7 @@ const marketExpectationColor = computed(() => {
 })
 
 const investorSentimentColor = computed(() => {
-  const score = store.analysisData?.overall_sentiment?.investor_sentiment || 0
+  const score = store.analysisData?.analysis_summary?.investor_sentiment || 0
   if (score > 75) return 'text-quantum'
   if (score > 50) return 'text-primary'
   if (score > 25) return 'text-sentiment-neutral'
@@ -43,17 +67,28 @@ const investorSentimentColor = computed(() => {
 
 // 方法
 const handleSearch = async (query, cb) => {
+  console.log('[App] Search triggered:', query)
   if (query.length < 2) {
+    console.log('[App] Query too short, skipping')
     cb([])
     return
   }
   await store.searchStocks(query)
+  console.log('[App] Search completed, results:', store.searchResults)
   cb(store.searchResults)
 }
 
-const handleSelect = (item) => {
+const handleSelect = async (item) => {
+  console.log('[App] Stock selected:', item)
   store.setCurrentStock(item)
-  store.getStockAnalysis(item.code)
+  console.log('[App] Fetching analysis...')
+  await store.getStockAnalysis(item.code)
+  console.log('[App] Analysis completed:', {
+    hasData: !!store.analysisData,
+    score: store.sentimentScore,
+    confidence: store.confidenceIndex,
+    debugState: store.debugState
+  })
 }
 
 const refreshData = () => {
@@ -63,18 +98,27 @@ const refreshData = () => {
 }
 
 const formatMarketExpectation = (value) => {
-  if (!value) return '0%'
-  return `${value > 0 ? '+' : ''}${value}%`
+  const score = store.analysisData?.analysis_summary?.market_expectation
+  if (!score) return '0%'
+  return `${score > 0 ? '+' : ''}${score}%`
 }
 
 const formatInvestorSentiment = (value) => {
-  if (!value) return '0%'
-  return `${value}%`
+  const score = store.analysisData?.analysis_summary?.investor_sentiment
+  if (!score) return '0%'
+  return `${score}%`
 }
 </script>
 
 <template>
   <div class="min-h-screen">
+    <!-- Debug Info -->
+    <div
+      class="fixed bottom-4 right-4 p-4 bg-black/50 text-xs text-white rounded-lg max-w-md z-50 overflow-auto max-h-96">
+      <div class="mb-2 font-bold">Debug Information:</div>
+      <pre>{{ JSON.stringify(debugInfo, null, 2) }}</pre>
+    </div>
+
     <!-- 顶部导航栏 -->
     <header class="card fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between">
       <div class="text-2xl font-bold text-primary glow">
@@ -90,15 +134,8 @@ const formatInvestorSentiment = (value) => {
     <main class="pt-20 px-6">
       <!-- 搜索区域 -->
       <div class="card p-6 mb-6">
-        <el-autocomplete
-          v-model="searchQuery"
-          :fetch-suggestions="handleSearch"
-          placeholder="输入股票名称或代码"
-          class="w-full"
-          :prefix-icon="Search"
-          :loading="store.loading"
-          @select="handleSelect"
-        >
+        <el-autocomplete v-model="searchQuery" :fetch-suggestions="handleSearch" placeholder="输入股票名称或代码" class="w-full"
+          :prefix-icon="Search" :loading="store.loading" @select="handleSelect">
           <template #default="{ item }">
             <div class="flex justify-between">
               <span>{{ item.name }}</span>
@@ -109,14 +146,7 @@ const formatInvestorSentiment = (value) => {
       </div>
 
       <!-- 错误提示 -->
-      <el-alert
-        v-if="store.error"
-        :title="store.error"
-        type="error"
-        class="mb-6"
-        show-icon
-        closable
-      />
+      <el-alert v-if="store.error" :title="store.error" type="error" class="mb-6" show-icon closable />
 
       <!-- 数据展示区域 -->
       <div v-if="store.currentStock" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -132,21 +162,18 @@ const formatInvestorSentiment = (value) => {
             <el-loading />
           </div>
           <template v-else>
-            <MainGauge
-              :score="store.analysisData?.overall_sentiment?.score || 0"
-              :confidence="store.analysisData?.overall_sentiment?.confidence_index || 0"
-            />
+            <MainGauge :score="sentimentScore" :confidence="confidenceIndex" />
             <div class="mt-4 grid grid-cols-2 gap-4">
               <div class="text-center">
                 <div class="text-sm text-gray-400">市场预期</div>
                 <div class="text-lg font-bold" :class="marketExpectationColor">
-                  {{ formatMarketExpectation(store.analysisData?.overall_sentiment?.market_expectation_strength) }}
+                  {{ formatMarketExpectation(store.analysisData?.analysis_summary?.market_expectation) }}
                 </div>
               </div>
               <div class="text-center">
                 <div class="text-sm text-gray-400">投资者情绪</div>
                 <div class="text-lg font-bold" :class="investorSentimentColor">
-                  {{ formatInvestorSentiment(store.analysisData?.overall_sentiment?.investor_sentiment) }}
+                  {{ formatInvestorSentiment(store.analysisData?.analysis_summary?.investor_sentiment) }}
                 </div>
               </div>
             </div>
@@ -187,9 +214,11 @@ const formatInvestorSentiment = (value) => {
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
