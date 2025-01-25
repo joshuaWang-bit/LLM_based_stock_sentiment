@@ -1,12 +1,16 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { Search, Refresh, Setting } from '@element-plus/icons-vue'
+import { Search, Refresh, Setting, Close, Monitor, InfoFilled } from '@element-plus/icons-vue'
 import { useStockStore } from './stores/stockStore'
 import MainGauge from './components/SentimentDashboard/MainGauge.vue'
 
 // 状态
 const searchQuery = ref('')
 const store = useStockStore()
+const showDebugInfo = ref(false)
+const showDetails = ref(false)
+const showTrendDetails = ref(false)
+const showTopicDetails = ref(false)
 
 // Debug computed properties
 const debugInfo = computed(() => ({
@@ -97,26 +101,44 @@ const refreshData = () => {
   }
 }
 
-const formatMarketExpectation = (value) => {
+const formatMarketExpectation = () => {
   const score = store.analysisData?.analysis_summary?.market_expectation
-  if (!score) return '0%'
-  return `${score > 0 ? '+' : ''}${score}%`
+  console.log('[App] Formatting market expectation:', score)
+  if (score === undefined || score === null) return '0'
+  return `${score > 0 ? '+' : ''}${score}`
 }
 
-const formatInvestorSentiment = (value) => {
+const formatInvestorSentiment = () => {
   const score = store.analysisData?.analysis_summary?.investor_sentiment
-  if (!score) return '0%'
+  console.log('[App] Formatting investor sentiment:', score)
+  if (score === undefined || score === null) return '0%'
   return `${score}%`
 }
 </script>
 
 <template>
-  <div class="min-h-screen">
+  <div class="flex flex-col min-h-screen bg-background text-white">
     <!-- Debug Info -->
-    <div
+    <div v-if="showDebugInfo"
       class="fixed bottom-4 right-4 p-4 bg-black/50 text-xs text-white rounded-lg max-w-md z-50 overflow-auto max-h-96">
-      <div class="mb-2 font-bold">Debug Information:</div>
+      <div class="flex justify-between items-center mb-2">
+        <div class="font-bold">Debug Information</div>
+        <el-button type="info" size="small" circle @click="showDebugInfo = false">
+          <el-icon>
+            <Close />
+          </el-icon>
+        </el-button>
+      </div>
       <pre>{{ JSON.stringify(debugInfo, null, 2) }}</pre>
+    </div>
+
+    <!-- Debug Toggle Button -->
+    <div v-else class="fixed bottom-4 right-4 z-50">
+      <el-button type="info" circle @click="showDebugInfo = true">
+        <el-icon>
+          <Monitor />
+        </el-icon>
+      </el-button>
     </div>
 
     <!-- 顶部导航栏 -->
@@ -154,35 +176,55 @@ const formatInvestorSentiment = (value) => {
         <div class="card p-6">
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold">情感分析</h2>
-            <el-tag :type="sentimentType" effect="dark" class="glow">
-              {{ sentimentLabel }}
-            </el-tag>
+            <div class="flex items-center gap-2">
+              <el-button v-if="!showDetails" type="info" size="small" @click="showDetails = true">
+                查看详情
+              </el-button>
+              <el-tag :type="sentimentType" effect="dark" class="glow">
+                {{ sentimentLabel }}
+              </el-tag>
+            </div>
           </div>
           <div v-if="store.loading" class="flex justify-center items-center h-64">
             <el-loading />
           </div>
           <template v-else>
-            <MainGauge :score="sentimentScore" :confidence="confidenceIndex" />
+            <MainGauge :score="sentimentScore" :confidence="confidenceIndex" :show-details="showDetails"
+              @close-details="showDetails = false" />
             <div class="mt-4 grid grid-cols-2 gap-4">
               <div class="text-center">
-                <div class="text-sm text-gray-400">市场预期</div>
-                <div class="text-lg font-bold" :class="marketExpectationColor">
-                  {{ formatMarketExpectation(store.analysisData?.analysis_summary?.market_expectation) }}
+                <div class="text-xs text-gray-400">市场预期</div>
+                <div class="text-sm font-bold" :class="marketExpectationColor">
+                  {{ formatMarketExpectation() }}
                 </div>
               </div>
               <div class="text-center">
-                <div class="text-sm text-gray-400">投资者情绪</div>
-                <div class="text-lg font-bold" :class="investorSentimentColor">
-                  {{ formatInvestorSentiment(store.analysisData?.analysis_summary?.investor_sentiment) }}
+                <div class="text-xs text-gray-400">投资者情绪</div>
+                <div class="text-sm font-bold" :class="investorSentimentColor">
+                  {{ formatInvestorSentiment() }}
                 </div>
+              </div>
+            </div>
+            <!-- 分析摘要 -->
+            <div v-if="store.analysisData?.analysis_summary?.summary" class="mt-4">
+              <div class="text-xs text-gray-400 mb-1">分析摘要</div>
+              <div class="text-[11px] leading-5 text-red-400/80 backdrop-blur-sm bg-black/20 p-3 rounded-lg">
+                {{ store.analysisData.analysis_summary.summary }}
               </div>
             </div>
           </template>
         </div>
 
-        <!-- 时间趋势图 -->
+        <!-- 趋势分析 -->
         <div class="card p-6">
-          <h2 class="text-xl font-bold mb-4">趋势分析</h2>
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">趋势分析</h2>
+            <div class="flex items-center gap-2">
+              <el-button v-if="!showTrendDetails" type="info" size="small" @click="showTrendDetails = true">
+                查看详情
+              </el-button>
+            </div>
+          </div>
           <div v-if="store.loading" class="flex justify-center items-center h-64">
             <el-loading />
           </div>
@@ -191,7 +233,12 @@ const formatInvestorSentiment = (value) => {
 
         <!-- 主题分析 -->
         <div class="card p-6">
-          <h2 class="text-xl font-bold mb-4">主题分析</h2>
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">主题分析</h2>
+            <el-button v-if="!showTopicDetails" type="info" size="small" @click="showTopicDetails = true">
+              查看详情
+            </el-button>
+          </div>
           <div v-if="store.loading" class="flex justify-center items-center h-64">
             <el-loading />
           </div>
@@ -204,6 +251,42 @@ const formatInvestorSentiment = (value) => {
         <el-empty description="请搜索股票开始分析" />
       </div>
     </main>
+
+    <!-- Details Button -->
+    <div v-if="store.currentStock" class="absolute top-4 left-4">
+      <el-button type="primary" size="small" class="!bg-quantum/20 hover:!bg-quantum/30 backdrop-blur-sm"
+        @click="showDetails = !showDetails">
+        <el-icon class="mr-1">
+          <InfoFilled />
+        </el-icon>
+        查看详情
+      </el-button>
+    </div>
+
+    <!-- Debug Info Toggle -->
+    <!-- <div class="absolute bottom-4 right-4">
+      <el-button type="info" size="small" circle class="!bg-black/20 hover:!bg-black/30 backdrop-blur-sm"
+        @click="showDebugInfo = !showDebugInfo">
+        <el-icon>
+          <Monitor />
+        </el-icon>
+      </el-button>
+    </div> -->
+
+    <!-- Debug Info Panel -->
+    <!-- <div v-if="showDebugInfo" class="absolute bottom-16 right-4 max-w-md">
+      <div class="backdrop-blur-sm bg-black/20 rounded-lg p-3">
+        <div class="flex justify-between items-center mb-2">
+          <div class="text-xs text-gray-400 font-medium">调试信息</div>
+          <el-button type="info" size="small" circle @click="showDebugInfo = false">
+            <el-icon>
+              <Close />
+            </el-icon>
+          </el-button>
+        </div>
+        <pre class="text-[11px] text-gray-400 whitespace-pre-wrap">{{ JSON.stringify(debugInfo, null, 2) }}</pre>
+      </div>
+    </div> -->
   </div>
 </template>
 

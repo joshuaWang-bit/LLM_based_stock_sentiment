@@ -1,12 +1,35 @@
 <template>
-  <div class="h-64">
-    <!-- Debug Info -->
-    <div class="text-xs text-gray-400 mb-2">
-      <div>Raw Score: {{ score }} ({{ typeof score }})</div>
-      <div>Raw Confidence: {{ confidence }} ({{ typeof confidence }})</div>
-      <div>Normalized Score: {{ normalizedScore }}</div>
-      <div>Normalized Confidence: {{ normalizedConfidence }}</div>
-      <div>Chart Update Count: {{ updateCount }}</div>
+  <div class="h-64 relative">
+    <!-- Details Panel -->
+    <div v-if="showDetails" class="absolute top-0 left-0 right-0 z-10">
+      <div class="backdrop-blur-sm bg-black/20 rounded-lg p-3">
+        <div class="flex justify-between items-center mb-2">
+          <div class="text-xs text-gray-400 font-medium">详细信息</div>
+          <el-button type="info" size="small" circle @click="$emit('close-details')">
+            <el-icon>
+              <Close />
+            </el-icon>
+          </el-button>
+        </div>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-1">
+          <div class="text-[11px] text-gray-400">
+            <span class="opacity-60">原始分数:</span>
+            <span class="text-primary">{{ score }}</span>
+          </div>
+          <div class="text-[11px] text-gray-400">
+            <span class="opacity-60">原始置信度:</span>
+            <span class="text-primary">{{ confidence }}</span>
+          </div>
+          <div class="text-[11px] text-gray-400">
+            <span class="opacity-60">标准化分数:</span>
+            <span class="text-primary">{{ normalizedScore }}</span>
+          </div>
+          <div class="text-[11px] text-gray-400">
+            <span class="opacity-60">标准化置信度:</span>
+            <span class="text-primary">{{ normalizedConfidence }}</span>
+          </div>
+        </div>
+      </div>
     </div>
     <v-chart class="h-full w-full" :option="chartOption" :autoresize="true" @rendered="onChartRendered" />
   </div>
@@ -20,6 +43,7 @@ import { GaugeChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import { provide } from 'vue'
+import { Close } from '@element-plus/icons-vue'
 
 // 提供暗色主题
 provide(THEME_KEY, 'dark')
@@ -48,8 +72,14 @@ const props = defineProps({
       console.log('[MainGauge/Props] Validating confidence:', value)
       return !isNaN(value)
     }
+  },
+  showDetails: {
+    type: Boolean,
+    default: false
   }
 })
+
+defineEmits(['close-details'])
 
 // 数据处理
 const normalizedScore = computed(() => {
