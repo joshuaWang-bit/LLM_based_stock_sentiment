@@ -3,6 +3,7 @@ from typing import List, Dict
 import akshare as ak
 from backend.core.news_crawler import NewsCrawler
 from backend.core.sentiment_analyzer import SentimentAnalyzer
+from backend.utils.config import Config
 
 router = APIRouter()
 news_crawler = NewsCrawler()
@@ -38,23 +39,28 @@ async def search_stocks(query: str) -> List[Dict]:
 @router.get("/stock-analysis/{stock_code}")
 async def get_stock_analysis(
     stock_code: str,
-    days: int = 7,
-    max_news: int = 20,
-    sentiment_news: int = 5
+    days: int = Config.DEFAULT_DAYS,
+    max_news: int = Config.MAX_NEWS_PER_STOCK,
+    sentiment_news: int = Config.MAX_NEWS_FOR_SENTIMENT
 ) -> Dict:
     """获取股票新闻分析结果
 
     Args:
         stock_code: 股票代码
-        days: 获取最近几天的新闻
-        max_news: 最大新闻条数
-        sentiment_news: 用于情感分析的新闻条数
+        days: 获取最近几天的新闻，默认7天
+        max_news: 最大新闻条数，默认20条
+        sentiment_news: 用于情感分析的新闻条数，默认20条
 
     Returns:
         Dict: 分析结果，包含:
             - stock_info: 股票信息
             - analysis_summary: 分析摘要
-            - news_analysis: 新闻分析列表
+            - time_analysis: 时间维度分析
+            - topic_analysis: 主题维度分析
+            - source_analysis: 来源维度分析
+            - impact_analysis: 影响力分析
+            - risk_analysis: 风险分析
+            - news_analysis: 新闻列表
     """
     try:
         # 获取股票信息
@@ -79,7 +85,7 @@ async def get_stock_analysis(
                 "code": stock_info['code'],
                 "name": stock_info['name']
             },
-            **analysis_result  # 包含 analysis_summary 和 news_analysis
+            **analysis_result
         }
 
     except IndexError:

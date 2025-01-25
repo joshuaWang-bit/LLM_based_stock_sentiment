@@ -1,43 +1,45 @@
 import os
 import json
+import pandas as pd
 from datetime import datetime, timedelta
 from pathlib import Path
-import akshare as ak
-import pandas as pd
 from typing import List, Dict, Optional
+import akshare as ak
+from backend.utils.config import Config
 
 
 class NewsCrawler:
-    """新闻爬取类"""
+    """新闻爬虫类"""
 
     def __init__(self):
-        """初始化新闻爬取器"""
-        self.cache_dir = Path(
-            __file__).parent.parent.parent / 'data' / 'news_cache'
+        """初始化新闻爬虫"""
+        self.cache_dir = Config.NEWS_CACHE_DIR
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
     def _get_cache_path(self, stock_code: str) -> Path:
         """获取缓存文件路径"""
-        return self.cache_dir / f"{stock_code}_news.json"
+        return self.cache_dir / f"{stock_code}.json"
 
     def _load_cache(self, stock_code: str) -> Optional[Dict]:
-        """加载缓存数据"""
-        cache_path = self._get_cache_path(stock_code)
-        if not cache_path.exists():
-            return None
-
+        """加载缓存的新闻数据"""
         try:
+            cache_path = self._get_cache_path(stock_code)
+            if not cache_path.exists():
+                return None
+
             with open(cache_path, 'r', encoding='utf-8') as f:
                 cache_data = json.load(f)
-                cache_date = datetime.strptime(cache_data['date'], '%Y-%m-%d')
-                if cache_date.date() == datetime.now().date():
-                    return cache_data
+
+            # 检查缓存是否过期
+            cache_date = datetime.strptime(cache_data['date'], '%Y-%m-%d')
+            if (datetime.now() - cache_date).days <= Config.CACHE_VALID_DAYS:
+                return cache_data
         except Exception as e:
-            print(f"读取缓存出错: {e}")
+            print(f"读取新闻缓存出错: {e}")
         return None
 
     def _save_cache(self, stock_code: str, news_list: List[Dict]):
-        """保存缓存数据"""
+        """保存新闻数据到缓存"""
         try:
             cache_data = {
                 'date': datetime.now().strftime('%Y-%m-%d'),
@@ -46,9 +48,14 @@ class NewsCrawler:
             with open(self._get_cache_path(stock_code), 'w', encoding='utf-8') as f:
                 json.dump(cache_data, f, ensure_ascii=False, indent=2)
         except Exception as e:
-            print(f"保存缓存出错: {e}")
+            print(f"保存新闻缓存出错: {e}")
 
-    def get_stock_news(self, stock_code: str, days: int = 7, max_news: int = 20) -> List[Dict]:
+    def get_stock_news(
+        self,
+        stock_code: str,
+        days: int = Config.DEFAULT_DAYS,
+        max_news: int = Config.MAX_NEWS_PER_STOCK
+    ) -> List[Dict]:
         """获取股票新闻
 
         Args:
@@ -68,8 +75,11 @@ class NewsCrawler:
         cache_data = self._load_cache(stock_code)
         if cache_data:
             news_list = cache_data['news']
-            print(f"使用缓存数据，共{len(news_list)}条新闻")
-            return news_list[:max_news]
+            if len(news_list) >= max_news:  # 只有缓存数量满足要求才使用缓存
+                print(f"使用缓存数据，共{len(news_list)}条新闻")
+                return news_list[:max_news]
+            else:
+                print(f"缓存数据数量({len(news_list)})不足，需要重新获取")
 
         try:
             # 设置pandas显示选项

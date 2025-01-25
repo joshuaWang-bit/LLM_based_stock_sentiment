@@ -23,10 +23,19 @@
 
 ### 2.2 后端技术栈
 
-- FastAPI
-- 新闻爬虫
-- LLM 情感分析
-- APScheduler (可选，用于定时爬取)
+- FastAPI (Web 框架)
+- Poetry (依赖管理)
+- google.genai (Gemini API 调用)
+- akshare (股票数据获取)
+- pathlib (跨平台路径处理)
+- asyncio (异步处理)
+
+### 2.3 缓存机制
+
+- 新闻数据缓存：避免重复爬取
+- 情感分析缓存：减少 API 调用
+- 缓存有效期：1 天
+- 缓存存储：本地文件系统
 
 ## 3. 系统架构
 
@@ -58,9 +67,12 @@ project/
 │   ├── core/
 │   │   ├── crawler.py     # 新闻爬虫
 │   │   └── analyzer.py    # 情感分析
-│   ├── services/
-│   │   └── stock.py       # 股票服务
-│   └── utils/
+│   ├── utils/
+│   │   ├── config.py      # 配置管理
+│   │   └── gemini_utils.py # LLM工具
+│   └── data/
+│       ├── news_cache/    # 新闻缓存
+│       └── sentiment_cache/ # 情感分析缓存
 └── docs/
 ```
 
@@ -90,116 +102,452 @@ project/
 └────────────────────────────────┘
 ```
 
+### 4.3 组件详细设计
+
+#### 4.3.1 SearchBar.vue
+
+```vue
+<template>
+  <div class="search-bar glass-effect">
+    <el-input
+      v-model="searchQuery"
+      placeholder="输入股票名称或代码"
+      :suffix-icon="Search"
+    />
+  </div>
+</template>
+
+<style>
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+</style>
+```
+
+#### 4.3.2 SentimentDashboard.vue
+
+- 整体情感得分仪表盘
+- 市场预期显示
+- 多维度分析雷达图
+- 风险等级指示器
+
+#### 4.3.3 TrendChart.vue
+
+- 情感走势折线图
+- 关键事件标注点
+- 时间轴可选择范围
+
+#### 4.3.4 NewsList.vue
+
+- 新闻列表卡片式展示
+- 支持分页
+- 每条新闻显示标题、来源、时间、情感倾向
+- 点击展开显示详细内容
+
+### 4.4 数据可视化设计
+
+#### 4.4.1 情感得分仪表盘
+
+```javascript
+// ECharts仪表盘配置
+{
+  series: [
+    {
+      type: "gauge",
+      startAngle: 180,
+      endAngle: 0,
+      min: -1,
+      max: 1,
+      splitNumber: 8,
+      axisLine: {
+        lineStyle: {
+          width: 6,
+          color: [
+            [-0.5, "#ff4b55"], // 红色
+            [0, "#ffeb3b"], // 黄色
+            [1, "#4CAF50"], // 绿色
+          ],
+        },
+      },
+      pointer: {
+        icon: "path://M12.8,0.7l12,40.1H0.7L12.8,0.7z",
+        length: "12%",
+        width: 20,
+        offsetCenter: [0, "-60%"],
+        itemStyle: {
+          color: "auto",
+        },
+      },
+      axisTick: {
+        length: 12,
+        lineStyle: {
+          color: "auto",
+          width: 2,
+        },
+      },
+      splitLine: {
+        length: 20,
+        lineStyle: {
+          color: "auto",
+          width: 5,
+        },
+      },
+      title: {
+        offsetCenter: [0, "-20%"],
+        fontSize: 20,
+      },
+      detail: {
+        fontSize: 30,
+        offsetCenter: [0, "0%"],
+        valueAnimation: true,
+        formatter: function (value) {
+          return value.toFixed(2);
+        },
+        color: "auto",
+      },
+    },
+  ];
+}
+```
+
+#### 4.4.2 情感趋势图
+
+```javascript
+// ECharts折线图配置
+{
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
+  xAxis: {
+    type: 'time',
+    boundaryGap: false,
+    axisLine: {
+      lineStyle: {
+        color: '#666'
+      }
+    }
+  },
+  yAxis: {
+    type: 'value',
+    min: -1,
+    max: 1,
+    splitLine: {
+      lineStyle: {
+        color: 'rgba(255,255,255,0.1)'
+      }
+    }
+  },
+  series: [{
+    type: 'line',
+    smooth: true,
+    symbolSize: 8,
+    itemStyle: {
+      color: '#00f0ff'
+    },
+    areaStyle: {
+      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: 'rgba(0,240,255,0.3)' },
+        { offset: 1, color: 'rgba(0,240,255,0)' }
+      ])
+    }
+  }]
+}
+```
+
+#### 4.4.3 主题分析雷达图
+
+```javascript
+// ECharts雷达图配置
+{
+  radar: {
+    indicator: [
+      { name: '公司经营', max: 1 },
+      { name: '财务表现', max: 1 },
+      { name: '市场竞争', max: 1 },
+      { name: '产品技术', max: 1 },
+      { name: '行业政策', max: 1 },
+      { name: '资本市场', max: 1 }
+    ],
+    splitArea: {
+      areaStyle: {
+        color: ['rgba(255,255,255,0.05)']
+      }
+    },
+    axisLine: {
+      lineStyle: {
+        color: 'rgba(255,255,255,0.2)'
+      }
+    }
+  },
+  series: [{
+    type: 'radar',
+    lineStyle: {
+      color: '#7b42ff'
+    },
+    areaStyle: {
+      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: 'rgba(123,66,255,0.3)' },
+        { offset: 1, color: 'rgba(123,66,255,0)' }
+      ])
+    }
+  }]
+}
+```
+
+### 4.5 交互设计
+
+#### 4.5.1 搜索交互
+
+- 输入防抖（300ms）
+- 搜索建议实时显示
+- 支持键盘上下键选择
+
+#### 4.5.2 图表交互
+
+- 鼠标悬停显示详细数据
+- 支持时间范围选择
+- 关键事件点击展示详情
+- 雷达图维度点击筛选
+
+#### 4.5.3 新闻列表交互
+
+- 无限滚动加载
+- 点击展开/收起动画
+- 情感标签颜色区分
+- 来源图标显示
+
+#### 4.5.4 响应式适配
+
+- 桌面端：多列布局
+- 平板端：双列布局
+- 移动端：单列布局
+- 图表自适应容器大小
+
+### 4.6 性能优化
+
+#### 4.6.1 加载优化
+
+- 骨架屏加载
+- 图片懒加载
+- 组件异步加载
+- 数据分页加载
+
+#### 4.6.2 渲染优化
+
+- 虚拟列表
+- 防抖节流
+- 组件缓存
+- 长列表性能优化
+
 ## 5. 功能模块设计
 
 ### 5.1 新闻爬虫模块
 
 ```python
 class NewsCrawler:
-    async def fetch_news(self, stock_code: str, days: int = 7) -> List[dict]:
-        """
-        爬取指定股票的新闻
-        返回格式：
-        [
-            {
-                "title": str,
-                "summary": str,
-                "content": str,
-                "publish_date": datetime,
-                "source": str
-            },
-            ...
-        ]
-        """
-        pass
+    def __init__(self):
+        self.cache_dir = Path(__file__).parent.parent.parent / 'data' / 'news_cache'
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
 
+    async def get_stock_news(
+        self,
+        stock_code: str,
+        days: int = 7,
+        max_news: int = 20
+    ) -> List[Dict]:
+        """
+        获取股票新闻，优先从缓存加载
+
+        Args:
+            stock_code: 股票代码
+            days: 获取天数
+            max_news: 最大新闻数量
+
+        Returns:
+            List[Dict]: 新闻列表
+            [
+                {
+                    "title": str,
+                    "content": str,
+                    "publish_time": str,  # YYYY-MM-DD HH:MM:SS
+                    "source": str,
+                    "url": str
+                },
+                ...
+            ]
+        """
 ```
 
 ### 5.2 情感分析模块
 
 ```python
 class SentimentAnalyzer:
-    async def analyze(self, news_list: List[dict]) -> List[dict]:
+    def __init__(self):
+        self.cache_dir = Path(__file__).parent.parent.parent / 'data' / 'sentiment_cache'
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+        self.gemini_client = GeminiClient(
+            api_key=Config.GEMINI_API_KEY,
+            model=Config.GEMINI_MODEL
+        )
+
+    async def analyze_sentiment(
+        self,
+        news_list: List[Dict],
+        max_news: int = 20
+    ) -> Dict:
         """
-        分析新闻情感
-        返回格式：
-        [
+        分析新闻情感，优先从缓存加载
+
+        Args:
+            news_list: 新闻列表
+            max_news: 分析的最大新闻数量
+
+        Returns:
+            Dict: 多维度情感分析结果
             {
-                "news": {...},  # 原新闻数据
-                "sentiment": {
-                    "score": float,  # 0-1之间
-                    "label": str     # positive/negative/neutral
-                }
-            },
-            ...
-        ]
+                "analysis_summary": {
+                    "overall_score": float,  # -1到1
+                    "sentiment_label": str,
+                    "summary": str,
+                    "market_expectation": str,
+                    "analysis_period": {
+                        "start_date": str,
+                        "end_date": str
+                    }
+                },
+                "time_analysis": {...},
+                "topic_analysis": {...},
+                "source_analysis": {...},
+                "impact_analysis": {...},
+                "risk_analysis": {...},
+                "news_analysis": [...]
+            }
         """
-        pass
 ```
-
-### 5.3 数据流转过程
-
-1. 用户输入股票名称
-2. 后端转换为股票代码
-3. 爬虫获取新闻数据
-4. LLM 进行情感分析
-5. 返回分析结果
-6. 前端展示数据
 
 ## 6. API 接口设计
 
-### 6.1 前端 API
-
-```javascript
-// 股票搜索
-GET /api/stocks/search?query=${query}
-
-// 获取股票新闻及情感分析
-GET /api/stock-analysis/${stockCode}?days=${days}
-```
-
-### 6.2 后端 API
+### 6.1 股票分析接口
 
 ```python
-@app.get("/api/stocks/search")
-async def search_stocks(query: str):
-    """搜索股票，返回股票代码和名称"""
-    return [{"code": "000001", "name": "平安银行"}, ...]
+@router.get("/api/stock-analysis/{stock_code}")
+async def get_stock_analysis(
+    stock_code: str,
+    days: int = 7,
+    max_news: int = 20,
+    sentiment_news: int = 5
+) -> Dict:
+    """
+    获取股票新闻情感分析结果
 
-@app.get("/api/stock-analysis/{stock_code}")
-async def get_stock_analysis(stock_code: str, days: int = 7):
-    """获取股票新闻分析结果"""
-    # 1. 爬取新闻
-    news_list = await crawler.fetch_news(stock_code, days)
-    # 2. 情感分析
-    analysis_results = await analyzer.analyze(news_list)
-    # 3. 返回结果
-    return {
-        "stock_info": {"code": stock_code, "name": "xxx"},
-        "analysis": analysis_results
-    }
+    Args:
+        stock_code: 股票代码
+        days: 分析天数，默认7天
+        max_news: 爬取的最大新闻数量，默认20条
+        sentiment_news: 进行情感分析的新闻数量，默认5条
+
+    Returns:
+        Dict: 详细的多维度分析结果
+    """
 ```
 
-## 7. 扩展性考虑
+### 6.2 返回数据结构
 
-### 7.1 未来可能的数据持久化方案
+```python
+{
+    "stock_info": {
+        "code": str,
+        "name": str
+    },
+    "analysis_summary": {
+        "overall_score": float,  # -1到1之间
+        "sentiment_label": str,  # 情感标签
+        "summary": str,         # 整体分析总结
+        "market_expectation": str,  # 市场预期
+        "analysis_period": {
+            "start_date": str,  # YYYY-MM-DD
+            "end_date": str     # YYYY-MM-DD
+        }
+    },
+    "time_analysis": {
+        "trend": [
+            {
+                "date": str,    # YYYY-MM-DD
+                "score": float,
+                "key_events": [str]
+            }
+        ],
+        "trend_prediction": str
+    },
+    "topic_analysis": {
+        "company_operation": {
+            "score": float,
+            "summary": str,
+            "key_points": [str]
+        },
+        "financial_performance": {...},
+        "market_competition": {...},
+        "product_technology": {...},
+        "industry_policy": {...},
+        "capital_market": {...}
+    },
+    "source_analysis": {
+        "mainstream_media": {"score": float, "summary": str},
+        "industry_media": {"score": float, "summary": str},
+        "self_media": {"score": float, "summary": str},
+        "official_announcement": {"score": float, "summary": str}
+    },
+    "impact_analysis": {
+        "importance_level": str,  # 高/中/低
+        "market_impact": {
+            "score": float,      # 0-1
+            "duration": str,
+            "key_factors": [str]
+        }
+    },
+    "risk_analysis": {
+        "risk_level": str,      # 高/中/低
+        "risk_factors": [
+            {
+                "factor": str,
+                "description": str,
+                "severity": str  # 高/中/低
+            }
+        ]
+    },
+    "news_analysis": [
+        {
+            "title": str,
+            "content": str,
+            "publish_time": str,  # YYYY-MM-DD HH:MM:SS
+            "source": str,
+            "url": str
+        }
+    ]
+}
+```
 
-- 添加 SQLite 数据库存储历史数据
-- 使用 Redis 缓存热门查询结果
-- 实现定时爬虫任务
+## 7. 错误处理
 
-### 7.2 性能优化
+### 7.1 API 错误
 
-- 实现请求缓存
-- 并行处理新闻爬取
-- 批量情感分析
+- 400: 请求参数错误
+- 404: 股票代码不存在
+- 429: API 调用频率超限
+- 500: 服务器内部错误
+- 503: 第三方服务不可用
 
-### 7.3 功能扩展
+### 7.2 错误恢复机制
 
-- 非交易日新闻处理
-- 实时数据更新
-- 自定义时间范围
-- 多维度分析
+- 新闻爬取失败：返回缓存数据或空列表
+- LLM API 调用失败：使用关键词分析作为备选方案
+- 缓存读写失败：继续处理但不缓存结果
 
 ## 8. 开发计划
 
