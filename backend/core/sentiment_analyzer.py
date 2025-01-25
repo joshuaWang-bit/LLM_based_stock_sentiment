@@ -224,7 +224,10 @@ class SentimentAnalyzer:
         Returns:
             Dict: 情感分析结果，包含多维度分析
         """
+        print(f"开始情感分析，新闻数量: {len(news_list)}, 最大分析数量: {max_news}")
+
         if not news_list:
+            print("没有新闻数据可供分析")
             return self._format_response({
                 'overall_sentiment': {
                     'score': 0.0,
@@ -241,9 +244,12 @@ class SentimentAnalyzer:
             reverse=True
         )[:max_news]
 
+        print(f"将分析最新的 {len(news_to_analyze)} 条新闻")
+
         # 尝试加载缓存
         cached_result = self._load_from_cache(news_to_analyze, max_news)
         if cached_result is not None:
+            print("使用缓存的分析结果")
             return self._format_response(cached_result, news_to_analyze)
 
         try:
@@ -256,30 +262,53 @@ class SentimentAnalyzer:
                 for news in news_to_analyze
             ])
 
+            print("已准备新闻内容用于分析")
+
             # 使用模板构建提示词
             prompt = Config.SENTIMENT_PROMPT.format(news_content=news_content)
+            print("已构建分析提示词")
 
             try:
+                print("开始调用 Gemini API 进行分析...")
                 # 使用GeminiClient进行分析
                 analysis_result = await self.gemini_client.analyze_sentiment(prompt)
+                print("Gemini API 分析完成，结果类型:", type(analysis_result))
+                print("分析结果:", json.dumps(
+                    analysis_result, ensure_ascii=False, indent=2))
+
                 # 保存缓存
+                print("正在保存分析结果到缓存...")
                 self._save_to_cache(news_to_analyze, max_news, analysis_result)
             except Exception as e:
-                print(f"Gemini API分析失败，使用关键词分析作为备选: {e}")
+                print(f"Gemini API分析失败，详细错误: {str(e)}")
+                print("使用关键词分析作为备选方案")
                 # 如果API调用失败，使用关键词分析
                 analysis_result = self._analyze_by_keywords(news_to_analyze)
 
             # 格式化响应
-            return self._format_response(analysis_result, news_to_analyze)
+            print("正在格式化分析结果...")
+            formatted_result = self._format_response(
+                analysis_result, news_to_analyze)
+            print("格式化完成")
+            return formatted_result
 
         except Exception as e:
-            print(f"情感分析出错: {e}")
+            print(f"情感分析过程中出错: {str(e)}")
+            print("错误的完整堆栈跟踪:")
+            import traceback
+            print(traceback.format_exc())
             # 发生错误时使用关键词分析作为备选方案
+            print("使用关键词分析作为备选方案")
             analysis_result = self._analyze_by_keywords(news_to_analyze)
             return self._format_response(analysis_result, news_to_analyze)
 
     def _format_response(self, analysis_result: Dict, news_list: List[Dict]) -> Dict:
         """格式化API响应"""
+        print("开始格式化响应...")
+        print("输入的 analysis_result 类型:", type(analysis_result))
+        print("输入的 analysis_result 内容:", json.dumps(
+            analysis_result, ensure_ascii=False, indent=2))
+
         try:
             # 获取分析时间范围
             dates = [datetime.strptime(news['publish_time'], '%Y-%m-%d %H:%M:%S')
@@ -287,7 +316,17 @@ class SentimentAnalyzer:
             start_date = min(dates) if dates else None
             end_date = max(dates) if dates else None
 
-            return {
+            # 验证必要的字段是否存在
+            if not isinstance(analysis_result, dict):
+                print(f"错误：analysis_result 不是字典类型，而是 {type(analysis_result)}")
+                raise ValueError("analysis_result must be a dictionary")
+
+            if 'overall_sentiment' not in analysis_result:
+                print("错误：缺少 overall_sentiment 字段")
+                raise ValueError(
+                    "Missing overall_sentiment in analysis_result")
+
+            formatted_response = {
                 'analysis_summary': {
                     'overall_score': analysis_result['overall_sentiment']['score'],
                     'sentiment_label': analysis_result['overall_sentiment']['label'],
@@ -329,8 +368,15 @@ class SentimentAnalyzer:
                 }),
                 'news_analysis': news_list
             }
+
+            print("响应格式化成功")
+            return formatted_response
+
         except Exception as e:
-            print(f"格式化响应时出错: {e}")
+            print(f"格式化响应时出错: {str(e)}")
+            print("错误的完整堆栈跟踪:")
+            import traceback
+            print(traceback.format_exc())
             # 如果格式化失败，返回一个基本的响应
             return {
                 'analysis_summary': {

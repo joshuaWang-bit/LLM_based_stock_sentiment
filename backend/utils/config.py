@@ -38,65 +38,138 @@ class Config:
     }
 
     # Sentiment analysis prompt template
-    SENTIMENT_PROMPT = """请分析以下A股上市公司相关新闻的情感倾向，从多个维度进行分析并返回结构化的JSON结果：
+    SENTIMENT_PROMPT = '''你是一位专业的股票分析师，请对以下新闻进行多维度分析，并以JSON格式返回分析结果。
 
+新闻内容：
 {news_content}
 
-请返回以下JSON格式的分析结果：
-{
-    "overall_sentiment": {
-        "score": float,  # -1到1之间的情感得分
-        "label": str,    # 情感标签（极度看好/看好/中性/看空/极度看空）
-        "summary": str,  # 整体分析总结
-        "market_expectation": str  # 市场预期分析
-    },
-    "time_analysis": {
+请从以下维度进行分析并返回结构化的JSON结果：
+
+1. 整体市场情绪分析：
+- 总体情感得分和标签
+- 关键观点总结
+- 市场预期分析
+
+2. 时间维度分析：
+- 按日期的情感变化趋势
+- 重要时间节点识别
+- 趋势预测
+
+3. 主题维度分析：
+- 公司经营相关新闻分析
+- 财务表现相关新闻分析
+- 市场竞争相关新闻分析
+- 产品技术相关新闻分析
+- 行业政策相关新闻分析
+- 资本市场相关新闻分析
+
+4. 来源维度分析：
+- 主流媒体观点
+- 行业媒体观点
+- 自媒体观点
+- 官方发布观点
+
+5. 影响力分析：
+- 新闻重要性评级
+- 市场影响力评估
+- 持续影响时间预测
+
+请按照以下JSON格式返回分析结果：
+{{
+    "overall_sentiment": {{
+        "score": 0.0,  # 情感得分，范围-1到1
+        "label": "string",  # 情感标签：极度看好/看好/中性/看空/极度看空
+        "summary": "string",  # 整体分析总结，100字以内
+        "market_expectation": "string"  # 市场预期分析
+    }},
+    "time_analysis": {{
         "trend": [
-            {
-                "date": str,  # YYYY-MM-DD
-                "score": float,
-                "key_events": [str]
-            }
+            {{
+                "date": "YYYY-MM-DD",
+                "score": 0.0,
+                "key_events": ["string"]
+            }}
         ],
-        "trend_prediction": str
-    },
-    "topic_analysis": {
-        "company_operation": {
-            "score": float,
-            "summary": str,
-            "key_points": [str]
-        },
-        "financial_performance": {...},
-        "market_competition": {...},
-        "product_technology": {...},
-        "industry_policy": {...},
-        "capital_market": {...}
-    },
-    "source_analysis": {
-        "mainstream_media": {"score": float, "summary": str},
-        "industry_media": {"score": float, "summary": str},
-        "self_media": {"score": float, "summary": str},
-        "official_announcement": {"score": float, "summary": str}
-    },
-    "impact_analysis": {
-        "importance_level": str,  # 高/中/低
-        "market_impact": {
-            "score": float,  # 0-1
-            "duration": str,
-            "key_factors": [str]
-        }
-    },
-    "risk_analysis": {
-        "risk_level": str,  # 高/中/低
+        "trend_prediction": "string"  # 趋势预测
+    }},
+    "topic_analysis": {{
+        "company_operation": {{
+            "score": 0.0,
+            "summary": "string",
+            "key_points": ["string"]
+        }},
+        "financial_performance": {{
+            "score": 0.0,
+            "summary": "string",
+            "key_points": ["string"]
+        }},
+        "market_competition": {{
+            "score": 0.0,
+            "summary": "string",
+            "key_points": ["string"]
+        }},
+        "product_technology": {{
+            "score": 0.0,
+            "summary": "string",
+            "key_points": ["string"]
+        }},
+        "industry_policy": {{
+            "score": 0.0,
+            "summary": "string",
+            "key_points": ["string"]
+        }},
+        "capital_market": {{
+            "score": 0.0,
+            "summary": "string",
+            "key_points": ["string"]
+        }}
+    }},
+    "source_analysis": {{
+        "mainstream_media": {{
+            "score": 0.0,
+            "summary": "string"
+        }},
+        "industry_media": {{
+            "score": 0.0,
+            "summary": "string"
+        }},
+        "self_media": {{
+            "score": 0.0,
+            "summary": "string"
+        }},
+        "official_announcement": {{
+            "score": 0.0,
+            "summary": "string"
+        }}
+    }},
+    "impact_analysis": {{
+        "importance_level": "string",  # 高/中/低
+        "market_impact": {{
+            "score": 0.0,  # 影响力得分，范围0-1
+            "duration": "string",  # 预计持续时间
+            "key_factors": ["string"]
+        }}
+    }},
+    "risk_analysis": {{
+        "risk_level": "string",  # 高/中/低
         "risk_factors": [
-            {
-                "factor": str,
-                "description": str,
-                "severity": str  # 高/中/低
-            }
+            {{
+                "factor": "string",
+                "description": "string",
+                "severity": "string"  # 高/中/低
+            }}
         ]
-    }
-}"""
+    }}
+}}
+
+注意：
+1. 所有得分均在相应范围内
+2. 分析内容应简明扼要，突出重点
+3. 确保返回格式严格符合上述JSON结构
+4. 时间维度分析应考虑新闻发布时间的先后顺序
+5. 主题分类应准确，一条新闻可能属于多个主题
+6. 来源分析应考虑不同类型媒体的可信度
+7. 影响力分析应基于新闻内容的重要性和市场敏感度'''
 
     # 新闻爬取配置
     NEWS_CACHE_DAYS = 1  # 新闻缓存天数
@@ -149,92 +222,92 @@ class Config:
 - 持续影响时间预测
 
 请按照以下JSON格式返回分析结果：
-{
-    "overall_sentiment": {
+{{
+    "overall_sentiment": {{
         "score": 0.0,  # 情感得分，范围-1到1
         "label": "string",  # 情感标签：极度看好/看好/中性/看空/极度看空
         "summary": "string",  # 整体分析总结，100字以内
         "market_expectation": "string"  # 市场预期分析
-    },
-    "time_analysis": {
+    }},
+    "time_analysis": {{
         "trend": [
-            {
+            {{
                 "date": "YYYY-MM-DD",
                 "score": 0.0,
                 "key_events": ["string"]
-            }
+            }}
         ],
         "trend_prediction": "string"  # 趋势预测
-    },
-    "topic_analysis": {
-        "company_operation": {
+    }},
+    "topic_analysis": {{
+        "company_operation": {{
             "score": 0.0,
             "summary": "string",
             "key_points": ["string"]
-        },
-        "financial_performance": {
+        }},
+        "financial_performance": {{
             "score": 0.0,
             "summary": "string",
             "key_points": ["string"]
-        },
-        "market_competition": {
+        }},
+        "market_competition": {{
             "score": 0.0,
             "summary": "string",
             "key_points": ["string"]
-        },
-        "product_technology": {
+        }},
+        "product_technology": {{
             "score": 0.0,
             "summary": "string",
             "key_points": ["string"]
-        },
-        "industry_policy": {
+        }},
+        "industry_policy": {{
             "score": 0.0,
             "summary": "string",
             "key_points": ["string"]
-        },
-        "capital_market": {
+        }},
+        "capital_market": {{
             "score": 0.0,
             "summary": "string",
             "key_points": ["string"]
-        }
-    },
-    "source_analysis": {
-        "mainstream_media": {
+        }}
+    }},
+    "source_analysis": {{
+        "mainstream_media": {{
             "score": 0.0,
             "summary": "string"
-        },
-        "industry_media": {
+        }},
+        "industry_media": {{
             "score": 0.0,
             "summary": "string"
-        },
-        "self_media": {
+        }},
+        "self_media": {{
             "score": 0.0,
             "summary": "string"
-        },
-        "official_announcement": {
+        }},
+        "official_announcement": {{
             "score": 0.0,
             "summary": "string"
-        }
-    },
-    "impact_analysis": {
+        }}
+    }},
+    "impact_analysis": {{
         "importance_level": "string",  # 高/中/低
-        "market_impact": {
+        "market_impact": {{
             "score": 0.0,  # 影响力得分，范围0-1
             "duration": "string",  # 预计持续时间
             "key_factors": ["string"]
-        }
-    },
-    "risk_analysis": {
+        }}
+    }},
+    "risk_analysis": {{
         "risk_level": "string",  # 高/中/低
         "risk_factors": [
-            {
+            {{
                 "factor": "string",
                 "description": "string",
                 "severity": "string"  # 高/中/低
-            }
+            }}
         ]
-    }
-}
+    }}
+}}
 
 注意：
 1. 所有得分均在相应范围内
