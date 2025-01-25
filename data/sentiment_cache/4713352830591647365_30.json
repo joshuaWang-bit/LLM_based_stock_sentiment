@@ -1,0 +1,139 @@
+{
+  "date": "2025-01-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.6,
+      "label": "看好",
+      "summary": "初灵信息当日涨停，机构和营业部积极买入，市场情绪正面。尽管公司发布业绩预告显示2024年亏损，但其属于信创、云办公等热门概念股，并受益于计算机行业整体上涨，短期内市场情绪较为乐观。",
+      "market_expectation": "短期内受概念炒作和行业利好影响，股价可能继续上涨，但长期走势取决于公司业绩改善和基本面情况。"
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-20",
+          "score": 0.1,
+          "key_events": [
+            "业绩预告显示2024年亏损4000万-5800万"
+          ]
+        },
+        {
+          "date": "2025-01-21",
+          "score": 0.2,
+          "key_events": [
+            "业绩预告公布，股价小幅波动"
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "score": 0.8,
+          "key_events": [
+            "涨停，机构净买入，大量媒体报道，属于信创、云办公等热门概念股"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内股价可能继续上涨，但受业绩预告影响，涨幅可能受限。长期走势需关注公司基本面改善情况和市场整体走势。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.0,
+        "summary": "公司否认与小红书合作，并表示聚焦产业数智化应用市场。",
+        "key_points": [
+          "否认与小红书合作",
+          "聚焦产业数智化应用市场",
+          "云边端协同的边缘计算生态"
+        ]
+      },
+      "financial_performance": {
+        "score": -0.5,
+        "summary": "2024年预计亏损4000万-5800万元，由盈转亏，财务状况存在一定风险。",
+        "key_points": [
+          "2024年预计亏损",
+          "由盈转亏",
+          "子公司博瑞得与张建强仲裁诉讼"
+        ]
+      },
+      "market_competition": {
+        "score": 0.0,
+        "summary": "新闻中未提及公司与其他公司的直接竞争情况。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.2,
+        "summary": "公司致力于建设“云边端”协同的边缘计算生态，暗示在相关技术领域有一定的实力。",
+        "key_points": [
+          "边缘计算",
+          "云边端协同"
+        ]
+      },
+      "industry_policy": {
+        "score": 0.3,
+        "summary": "公司受益于信创概念的利好，以及计算机行业整体上涨趋势。",
+        "key_points": [
+          "信创概念",
+          "计算机行业上涨"
+        ]
+      },
+      "capital_market": {
+        "score": 0.8,
+        "summary": "股价涨停，换手率高，机构和营业部积极买入，市场关注度较高。",
+        "key_points": [
+          "涨停",
+          "高换手率",
+          "机构净买入",
+          "大量媒体报道"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.7,
+        "summary": "主流媒体如每日经济新闻、澎湃新闻等报道了公司股价波动和相关行业动态，信息较为可靠。"
+      },
+      "industry_media": {
+        "score": 0.8,
+        "summary": "证券时报网、南方财经网等行业媒体提供了详细的市场数据和分析，信息专业性强。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "未发现来自自媒体的显著影响。"
+      },
+      "official_announcement": {
+        "score": 0.9,
+        "summary": "公司官方发布的业绩预告和投资者互动平台回复，信息权威可靠。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "高",
+      "market_impact": {
+        "score": 0.7,
+        "duration": "短期",
+        "key_factors": [
+          "概念炒作",
+          "行业利好",
+          "机构投资",
+          "市场情绪"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "业绩亏损",
+          "description": "2024年业绩预告显示公司亏损，影响公司长期发展和投资者信心。",
+          "severity": "中"
+        },
+        {
+          "factor": "市场波动",
+          "description": "受市场情绪影响，股价波动较大，存在风险。",
+          "severity": "中"
+        },
+        {
+          "factor": "法律诉讼",
+          "description": "子公司博瑞得与张建强尚在仲裁诉讼中，存在不确定性。",
+          "severity": "低"
+        }
+      ]
+    }
+  }
+}
