@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义全局样式 */
+@layer base {
+body {
+    @apply bg-gradient-to-br from-background-start to-background-end min-h-screen text-white;
+}
+}
+
+/* 自定义组件样式 */
+@layer components {
+.card {
+    @apply bg-white/[0.07] backdrop-blur-glass rounded-lg border border-primary/30;
+}
+
+  .btn-primary {
+    @apply bg-primary text-background-start px-4 py-2 rounded-lg 
+           hover:bg-primary/80 transition-all duration-300;
+}
+
+  .btn-secondary {
+    @apply bg-secondary text-white px-4 py-2 rounded-lg 
+           hover:bg-secondary/80 transition-all duration-300;
+  }
+}
+
+/* 动画效果 */
+@keyframes glow {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+}
+
+.glow {
+  animation: glow 2s ease-in-out infinite;
+}
