@@ -1,0 +1,153 @@
+{
+  "date": "2025-01-26",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": -0.2,
+      "label": "看空",
+      "summary": "三木集团近期股价波动较大，受业绩预告亏损影响，市场情绪偏负面。尽管部分新闻显示股价上涨及资金流入，但亏损预期和资金净流出的新闻也削弱了市场信心。整体来看，市场对三木集团的未来发展持谨慎态度。",
+      "market_expectation": "市场对三木集团的预期较为悲观，主要受其巨额亏损预告影响。短期内股价可能仍有波动，长期走势取决于公司扭亏为盈的策略和执行能力。",
+      "confidence_index": 0.7
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-14",
+          "score": -0.3,
+          "key_events": [
+            "股东户数下降",
+            "主力资金撤离"
+          ]
+        },
+        {
+          "date": "2025-01-15",
+          "score": 0.1,
+          "key_events": [
+            "主力资金小幅流入"
+          ]
+        },
+        {
+          "date": "2025-01-16",
+          "score": -0.2,
+          "key_events": [
+            "资金流出"
+          ]
+        },
+        {
+          "date": "2025-01-17",
+          "score": 0.2,
+          "key_events": [
+            "董事会会议召开",
+            "露营经济概念股跟涨"
+          ]
+        },
+        {
+          "date": "2025-01-20",
+          "score": -0.8,
+          "key_events": [
+            "2024年业绩预告亏损4.8-5.3亿元"
+          ]
+        },
+        {
+          "date": "2025-01-23",
+          "score": 0.3,
+          "key_events": [
+            "沪指上涨，三木集团股价波动，部分时间段涨幅明显"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内三木集团股价可能继续波动，受市场情绪和公司业绩的影响。长期走势取决于公司能否有效解决亏损问题，并提升盈利能力。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": -0.4,
+        "summary": "公司经营状况不佳，控股子公司需要财务资助，存在一定经营风险。",
+        "key_points": [
+          "为控股子公司提供财务资助",
+          "经营状况不佳"
+        ]
+      },
+      "financial_performance": {
+        "score": -0.9,
+        "summary": "2024年预计亏损严重，同比扩大，严重影响市场信心。",
+        "key_points": [
+          "预计2024年亏损4.8-5.3亿元",
+          "亏损同比扩大"
+        ]
+      },
+      "market_competition": {
+        "score": 0.0,
+        "summary": "新闻中未体现明显的市场竞争信息。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.0,
+        "summary": "新闻中未体现产品的技术相关信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.1,
+        "summary": "露营经济概念的短暂利好，对股价影响有限。",
+        "key_points": [
+          "露营经济概念股跟涨"
+        ]
+      },
+      "capital_market": {
+        "score": -0.1,
+        "summary": "股价波动较大，资金流入流出频繁，市场表现不稳定。",
+        "key_points": [
+          "股价波动",
+          "资金流入流出"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.8,
+        "summary": "主流媒体报道较为全面，涵盖了股价波动、业绩预告等关键信息。"
+      },
+      "industry_media": {
+        "score": 0.7,
+        "summary": "行业媒体主要关注公司财务状况和市场表现。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "新闻中未发现明显的自媒体观点。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "公司官方公告提供了业绩预告等关键信息，具有较高的可靠性。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.4,
+        "duration": "短期",
+        "key_factors": [
+          "业绩预告亏损",
+          "市场情绪波动"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "高",
+      "risk_factors": [
+        {
+          "factor": "巨额亏损",
+          "description": "公司2024年预计亏损严重，严重影响公司信誉和市场信心。",
+          "severity": "高"
+        },
+        {
+          "factor": "资金流出",
+          "description": "持续的资金流出可能加剧股价下跌，对公司发展造成负面影响。",
+          "severity": "中"
+        },
+        {
+          "factor": "经营风险",
+          "description": "为控股子公司提供财务资助，可能进一步增加公司财务负担。",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}

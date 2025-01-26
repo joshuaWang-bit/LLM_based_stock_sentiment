@@ -83,7 +83,7 @@ class Config:
 请按照以下JSON格式返回分析结果：
 {{
     "overall_sentiment": {{
-        "score": 0.0,  # 情感得分，范围0到1
+        "score": 0.0,  # 情感得分，范围-1到1
         "label": "string",  # 情感标签：极度看好/看好/中性/看空/极度看空
         "summary": "string",  # 整体分析总结，100字以内
         "market_expectation": "string",  # 市场预期分析
@@ -94,7 +94,12 @@ class Config:
             {{
                 "date": "YYYY-MM-DD",
                 "score": 0.0,
-                "key_events": ["string"]
+                "key_events": [
+                    {{
+                        "title": "string",  # 事件标题，5字以内，如"解禁消息"
+                        "description": "string"  # 事件描述，20字以内，如"1.2亿股限售股将于2月1日解禁"
+                    }}
+                ]
             }}
         ],
         "trend_prediction": "string"  # 趋势预测
@@ -177,7 +182,8 @@ class Config:
 5. 主题分类应准确，一条新闻可能属于多个主题
 6. 来源分析应考虑不同类型媒体的可信度
 7. 影响力分析应基于新闻内容的重要性和市场敏感度
-8. 置信度指数必须提供，且需要综合考虑新闻来源可靠性、时效性、一致性和数据支撑'''
+8. 置信度指数必须提供，且需要综合考虑新闻来源可靠性、时效性、一致性和数据支撑
+9. key_events中的每个事件必须包含title和description两个字段，title应该简短精炼（5字以内），description应该对title进行补充说明（20字以内）'''
 
 #     # 新闻爬取配置
 #     NEWS_CACHE_DAYS = 1  # 新闻缓存天数

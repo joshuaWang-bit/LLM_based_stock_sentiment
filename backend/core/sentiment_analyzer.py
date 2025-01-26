@@ -381,6 +381,29 @@ class SentimentAnalyzer:
 
         return round(confidence_index, 2)
 
+    def _format_key_events(self, events: List) -> List[Dict]:
+        """格式化关键事件列表，确保符合新的数据结构
+
+        Args:
+            events: 原始事件列表，可能是字符串列表或已经是新格式
+
+        Returns:
+            List[Dict]: 格式化后的事件列表，每个事件包含title和description
+        """
+        formatted_events = []
+        for event in events:
+            # 如果已经是新格式，直接使用
+            if isinstance(event, dict) and 'title' in event and 'description' in event:
+                formatted_events.append(event)
+            # 如果是旧格式（字符串），转换为新格式
+            elif isinstance(event, str):
+                formatted_events.append({
+                    'title': event,  # 使用原字符串作为标题
+                    'description': ''  # 暂时为空，因为旧格式没有描述
+                })
+            # 忽略其他格式
+        return formatted_events
+
     def _format_response(self, analysis_result: Dict, news_list: List[Dict]) -> Dict:
         """格式化API响应"""
         print("开始格式化响应...")
@@ -416,6 +439,13 @@ class SentimentAnalyzer:
                     news_list, analysis_result)
                 print(f"计算得到的置信度指数: {confidence_index}")
 
+            # 格式化时间分析中的key_events
+            if 'time_analysis' in analysis_result and 'trend' in analysis_result['time_analysis']:
+                for trend in analysis_result['time_analysis']['trend']:
+                    if 'key_events' in trend:
+                        trend['key_events'] = self._format_key_events(
+                            trend['key_events'])
+
             formatted_response = {
                 'analysis_summary': {
                     'overall_score': analysis_result['overall_sentiment']['score'],
@@ -426,7 +456,7 @@ class SentimentAnalyzer:
                         'start_date': start_date.strftime('%Y-%m-%d') if start_date else None,
                         'end_date': end_date.strftime('%Y-%m-%d') if end_date else None
                     },
-                    'confidence_index': confidence_index  # 使用获取到的或计算的置信度
+                    'confidence_index': confidence_index
                 },
                 'time_analysis': analysis_result.get('time_analysis', {
                     'trend': [],
@@ -510,5 +540,5 @@ class SentimentAnalyzer:
                     'risk_level': '中',
                     'risk_factors': []
                 },
-                'news_analysis': news_list
+                'news_analysis': []
             }
