@@ -9,6 +9,8 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['dateHover'])
+
 const chartRef = ref(null)
 let chart = null
 
@@ -107,6 +109,17 @@ const updateChart = () => {
   }
 
   chart.setOption(option)
+
+  // 添加鼠标事件监听
+  chart.on('mouseover', (params) => {
+    if (params.componentType === 'series') {
+      const date = chartData.value.dates[params.dataIndex]
+      const trendData = props.trend.find(item => item.date === date)
+      if (trendData) {
+        emit('dateHover', trendData)
+      }
+    }
+  })
 }
 
 // 监听数据变化

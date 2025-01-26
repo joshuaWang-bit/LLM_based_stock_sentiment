@@ -1,0 +1,136 @@
+{
+  "date": "2025-01-26",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.8,
+      "label": "看好",
+      "summary": "AI概念股在本周五出现涨停潮，多只相关概念股涨停或涨超10%，计算机板块涨幅显著，主力资金净流入规模巨大。虽然初灵信息发布了业绩预告显示亏损，但市场情绪仍然积极，认为AI Agent概念的爆发是主要驱动因素。",
+      "market_expectation": "短期内AI概念股仍将保持强劲上涨势头，但需警惕短期过热风险。中长期走势取决于AI技术发展和应用落地情况。",
+      "confidence_index": 0.75
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-20",
+          "score": 0.2,
+          "key_events": [
+            "摩根士丹利增持初灵信息"
+          ]
+        },
+        {
+          "date": "2025-01-21",
+          "score": -0.4,
+          "key_events": [
+            "初灵信息发布2024年度业绩预告，预计亏损"
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "score": 0.9,
+          "key_events": [
+            "AI概念股涨停潮，计算机板块大涨"
+          ]
+        },
+        {
+          "date": "2025-01-25",
+          "score": 0.9,
+          "key_events": [
+            "A股港股全线上涨，计算机板块持续强势"
+          ]
+        }
+      ],
+      "trend_prediction": "短期内AI概念股行情可能持续，但需关注政策变化和市场情绪波动，存在回调风险。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.0,
+        "summary": "初灵信息澄清与小红书无业务合作，并表示在AI Agent方向已有明确布局。",
+        "key_points": [
+          "AI Agent布局",
+          "澄清小红书合作传闻"
+        ]
+      },
+      "financial_performance": {
+        "score": -0.6,
+        "summary": "初灵信息预计2024年亏损4000万-5800万元，由盈转亏。",
+        "key_points": [
+          "业绩预告显示亏损",
+          "由盈转亏"
+        ]
+      },
+      "market_competition": {
+        "score": 0.0,
+        "summary": "新闻未提及具体的市场竞争信息。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.8,
+        "summary": "AI Agent概念火热，多家公司在该领域布局。",
+        "key_points": [
+          "AI Agent",
+          "基于运维大模型的AI Agent",
+          "客服AI Agent"
+        ]
+      },
+      "industry_policy": {
+        "score": 0.0,
+        "summary": "新闻未提及相关的行业政策信息。",
+        "key_points": []
+      },
+      "capital_market": {
+        "score": 0.9,
+        "summary": "AI概念股集体上涨，主力资金大幅流入计算机板块。摩根士丹利增持初灵信息。",
+        "key_points": [
+          "AI概念股涨停潮",
+          "主力资金净流入",
+          "机构增持"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.8,
+        "summary": "主流媒体报道了AI概念股的涨停潮和计算机板块的大涨，信息较为全面。"
+      },
+      "industry_media": {
+        "score": 0.7,
+        "summary": "行业媒体关注AI Agent概念的爆发以及个股的涨跌情况。"
+      },
+      "self_media": {
+        "score": 0.5,
+        "summary": "自媒体报道相对较少，信息来源的可靠性有待进一步验证。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "初灵信息的官方公告披露了业绩预告和公司与小红书无业务合作等重要信息。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "高",
+      "market_impact": {
+        "score": 0.9,
+        "duration": "短期",
+        "key_factors": [
+          "AI概念股持续上涨",
+          "市场情绪高涨",
+          "机构资金流入"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "市场过热",
+          "description": "AI概念股短期涨幅过大，存在回调风险。",
+          "severity": "中"
+        },
+        {
+          "factor": "业绩不确定性",
+          "description": "初灵信息业绩预告显示亏损，对股价带来一定的不确定性。",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}
