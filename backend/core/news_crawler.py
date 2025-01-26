@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 import akshare as ak
 from backend.utils.config import Config
+from collections import defaultdict
 
 
 class NewsCrawler:
@@ -60,7 +61,7 @@ class NewsCrawler:
 
         Args:
             stock_code: 股票代码
-            days: 获取最近几天的新闻
+            days: 获取有新闻的天数（默认7天）
             max_news: 最大新闻条数
 
         Returns:
@@ -75,11 +76,13 @@ class NewsCrawler:
         cache_data = self._load_cache(stock_code)
         if cache_data:
             news_list = cache_data['news']
-            if len(news_list) >= max_news:  # 只有缓存数量满足要求才使用缓存
-                print(f"使用缓存数据，共{len(news_list)}条新闻")
-                return news_list[:max_news]
+            # 对缓存的新闻进行日期分组处理
+            date_grouped_news = self._group_news_by_date(news_list)
+            if len(date_grouped_news) >= days:  # 只有缓存的日期数满足要求才使用缓存
+                print(f"使用缓存数据，共{len(date_grouped_news)}个日期的新闻")
+                return self._process_grouped_news(date_grouped_news, days)
             else:
-                print(f"缓存数据数量({len(news_list)})不足，需要重新获取")
+                print(f"缓存数据日期数({len(date_grouped_news)})不足，需要重新获取")
 
         try:
             # 设置pandas显示选项
@@ -97,16 +100,8 @@ class NewsCrawler:
 
             # 处理新闻数据
             news_list = []
-            cutoff_date = datetime.now() - timedelta(days=days)
-
             for _, row in news_df.iterrows():
                 try:
-                    # 检查发布时间
-                    publish_time = datetime.strptime(
-                        row['发布时间'], '%Y-%m-%d %H:%M:%S')
-                    if publish_time < cutoff_date:
-                        continue
-
                     # 获取新闻内容
                     content = row['新闻内容'] if '新闻内容' in row and not pd.isna(
                         row['新闻内容']) else ''
@@ -127,9 +122,6 @@ class NewsCrawler:
                     }
                     news_list.append(news_item)
 
-                    if len(news_list) >= max_news:
-                        break
-
                 except Exception as e:
                     print(f"处理新闻出错: {e}")
                     continue
@@ -137,11 +129,49 @@ class NewsCrawler:
             # 按时间排序
             news_list.sort(key=lambda x: x['publish_time'], reverse=True)
 
-            # 保存缓存
-            self._save_cache(stock_code, news_list)
+            # 按日期分组并处理
+            date_grouped_news = self._group_news_by_date(news_list)
+            processed_news = self._process_grouped_news(
+                date_grouped_news, days)
 
-            return news_list
+            # 保存缓存
+            self._save_cache(stock_code, processed_news)
+
+            return processed_news
 
         except Exception as e:
             print(f"爬取新闻出错: {e}")
             return []
+
+    def _group_news_by_date(self, news_list: List[Dict]) -> Dict[str, List[Dict]]:
+        """将新闻按日期分组"""
+        date_grouped_news = defaultdict(list)
+        for news in news_list:
+            date = news['publish_time'].split()[0]  # 提取日期部分
+            date_grouped_news[date].append(news)
+        return dict(date_grouped_news)
+
+    def _process_grouped_news(self, date_grouped_news: Dict[str, List[Dict]], required_days: int) -> List[Dict]:
+        """处理分组后的新闻数据"""
+        # 按日期排序
+        sorted_dates = sorted(date_grouped_news.keys(), reverse=True)
+
+        # 获取指定天数的新闻
+        processed_news = []
+        days_count = 0
+
+        for date in sorted_dates:
+            if days_count >= required_days:
+                break
+
+            # 对每天的新闻按时间排序并限制数量
+            day_news = sorted(date_grouped_news[date],
+                              key=lambda x: x['publish_time'],
+                              reverse=True)
+
+            # 每天最多取5条新闻
+            day_news = day_news[:5]
+            processed_news.extend(day_news)
+            days_count += 1
+
+        return processed_news
