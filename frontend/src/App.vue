@@ -119,8 +119,8 @@ const formatMarketExpectation = () => {
 const formatInvestorSentiment = () => {
   const score = store.analysisData?.analysis_summary?.investor_sentiment
   console.log('[App] Formatting investor sentiment:', score)
-  if (score === undefined || score === null) return '0%'
-  return `${score}%`
+  if (score === undefined || score === null) return '0 分'
+  return `${score} 分`
 }
 </script>
 

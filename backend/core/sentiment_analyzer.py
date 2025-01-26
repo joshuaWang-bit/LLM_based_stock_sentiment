@@ -456,6 +456,7 @@ class SentimentAnalyzer:
                     'sentiment_label': analysis_result['overall_sentiment']['label'],
                     'summary': analysis_result['overall_sentiment']['summary'],
                     'market_expectation': analysis_result['overall_sentiment'].get('market_expectation', ''),
+                    'investor_sentiment': analysis_result['overall_sentiment'].get('investor_sentiment', '无'),
                     'analysis_period': {
                         'start_date': start_date.strftime('%Y-%m-%d') if start_date else None,
                         'end_date': end_date.strftime('%Y-%m-%d') if end_date else None
@@ -509,6 +510,7 @@ class SentimentAnalyzer:
                     'sentiment_label': '中性',
                     'summary': '数据处理过程中出现错误',
                     'market_expectation': '',
+                    'investor_sentiment': '无',
                     'analysis_period': {
                         'start_date': None,
                         'end_date': None
