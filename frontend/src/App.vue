@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { Search, Refresh, Setting, Close, Monitor, InfoFilled } from '@element-plus/icons-vue'
 import { useStockStore } from './stores/stockStore'
 import MainGauge from './components/SentimentDashboard/MainGauge.vue'
+import TrendAnalysis from './components/TrendAnalysis/TrendAnalysis.vue'
 
 // 状态
 const searchQuery = ref('')
@@ -68,6 +69,9 @@ const investorSentimentColor = computed(() => {
   if (score > 25) return 'text-sentiment-neutral'
   return 'text-sentiment-negative'
 })
+
+// 趋势分析数据
+const timeAnalysis = computed(() => store.analysisData?.time_analysis || {})
 
 // 方法
 const handleSearch = async (query, cb) => {
@@ -228,7 +232,9 @@ const formatInvestorSentiment = () => {
           <div v-if="store.loading" class="flex justify-center items-center h-64">
             <el-loading />
           </div>
-          <!-- 这里将添加趋势图表组件 -->
+          <template v-else>
+            <TrendAnalysis :time-analysis="timeAnalysis" />
+          </template>
         </div>
 
         <!-- 主题分析 -->
