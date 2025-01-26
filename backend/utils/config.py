@@ -17,7 +17,6 @@ class Config:
 
     # News limits
     MAX_NEWS_PER_STOCK = 20  # 每个股票最大新闻数量
-    MAX_NEWS_FOR_SENTIMENT = 20  # 用于情感分析的最大新闻数量
     DEFAULT_DAYS = 7  # 默认获取天数
 
     # Cache settings
@@ -46,7 +45,7 @@ class Config:
 请从以下维度进行分析并返回结构化的JSON结果：
 
 1. 整体市场情绪分析：
-- 总体情感得分（-1到1，-1表示极度负面，1表示极度正面）
+- 总体情感得分（0到1，0表示极度负面，1表示极度正面）
 - 情感标签（极度看好/看好/中性/看空/极度看空）
 - 关键观点总结（100字以内）
 - 市场预期分析
@@ -83,7 +82,7 @@ class Config:
 请按照以下JSON格式返回分析结果：
 {{
     "overall_sentiment": {{
-        "score": 0.0,  # 情感得分，范围-1到1
+        "score": 0.0,  # 情感得分，范围0到1
         "label": "string",  # 情感标签：极度看好/看好/中性/看空/极度看空
         "summary": "string",  # 整体分析总结，100字以内
         "market_expectation": "string",  # 市场预期分析

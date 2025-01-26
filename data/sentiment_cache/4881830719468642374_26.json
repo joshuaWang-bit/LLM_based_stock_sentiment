@@ -1,0 +1,165 @@
+{
+  "date": "2025-01-26",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.6,
+      "label": "看好",
+      "summary": "食品饮料行业整体向好，安井食品业绩增长，黑芝麻预盈，品渥食品扭亏，但部分企业也面临亏损压力。整体市场情绪偏正面，但需关注个股风险。",
+      "market_expectation": "食品饮料行业长期向好，但需关注个股业绩和市场竞争。",
+      "confidence_index": 0.75
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-26",
+          "score": 0.7,
+          "key_events": [
+            {
+              "title": "安井人事",
+              "description": "聘任证券事务代表，积极信号"
+            },
+            {
+              "title": "安井会议",
+              "description": "召开董事会会议，讨论重要议案"
+            },
+            {
+              "title": "黑芝麻会议",
+              "description": "召开董事会及股东大会"
+            },
+            {
+              "title": "行业展望",
+              "description": "食品饮料行业高性价比凸显"
+            }
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "score": 0.4,
+          "key_events": [
+            {
+              "title": "品渥扭亏",
+              "description": "预计2024年净利润扭亏为盈"
+            },
+            {
+              "title": "西王亏损",
+              "description": "预计2024年亏损3.5-5亿元"
+            },
+            {
+              "title": "维信诺预亏",
+              "description": "预计2024年净利润亏损24-28亿元"
+            }
+          ]
+        },
+        {
+          "date": "2025-01-23",
+          "score": 0.8,
+          "key_events": [
+            {
+              "title": "黑芝麻预盈",
+              "description": "2024年净利润预盈超5500万元"
+            }
+          ]
+        }
+      ],
+      "trend_prediction": "食品饮料行业整体保持增长态势，但个股业绩分化明显，需谨慎投资。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.7,
+        "summary": "安井食品积极推进国际化战略，黑芝麻强化成本控制，品渥食品聚焦主业并降本增效，三只松鼠进军宠物食品市场。",
+        "key_points": [
+          "安井食品国际化战略",
+          "黑芝麻成本控制",
+          "品渥食品降本增效",
+          "三只松鼠拓展宠物食品"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.5,
+        "summary": "安井食品前三季度业绩增长，黑芝麻预计盈利，品渥食品预计扭亏，西王食品和维信诺预计亏损。业绩表现分化严重。",
+        "key_points": [
+          "安井食品业绩增长",
+          "黑芝麻盈利",
+          "品渥食品扭亏",
+          "西王食品亏损",
+          "维信诺亏损"
+        ]
+      },
+      "market_competition": {
+        "score": 0.6,
+        "summary": "食品饮料行业竞争激烈，部分企业积极拓展新业务，如宠物食品市场。",
+        "key_points": [
+          "食品饮料行业竞争激烈",
+          "企业拓展新业务",
+          "宠物食品市场竞争"
+        ]
+      },
+      "product_technology": {
+        "score": 0.0,
+        "summary": "新闻中未提及具体产品技术信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.5,
+        "summary": "福建加强春节食品安全监管，北京市市场监管局提示食品自动售货商食品安全责任。",
+        "key_points": [
+          "食品安全监管加强"
+        ]
+      },
+      "capital_market": {
+        "score": 0.6,
+        "summary": "安井食品计划H股上市，南方基金看好A股长牛，部分公司股票质押。",
+        "key_points": [
+          "安井食品H股上市",
+          "A股长牛预期",
+          "股票质押"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.8,
+        "summary": "主流媒体报道较为客观，对市场行情和公司业绩进行综合分析。"
+      },
+      "industry_media": {
+        "score": 0.7,
+        "summary": "行业媒体侧重于行业发展趋势和企业竞争分析。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "无自媒体相关信息。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "官方公告信息可靠性最高，为分析提供了重要数据支撑。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.6,
+        "duration": "短期",
+        "key_factors": [
+          "食品饮料行业景气度",
+          "个股业绩表现",
+          "市场监管政策"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "市场竞争",
+          "description": "食品饮料行业竞争激烈，部分企业面临业绩下滑风险",
+          "severity": "中"
+        },
+        {
+          "factor": "经济下行",
+          "description": "宏观经济下行压力可能影响食品饮料行业增长",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}

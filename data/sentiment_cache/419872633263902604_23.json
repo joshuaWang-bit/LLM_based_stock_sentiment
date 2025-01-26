@@ -1,0 +1,163 @@
+{
+  "date": "2025-01-26",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.6,
+      "label": "看好",
+      "summary": "整体新闻情绪偏正面，证监会推动指数化投资利好资本市场，多家公司业绩向好，战略合作助力企业发展。但也有部分公司业绩亏损，存在一定风险。",
+      "market_expectation": "市场预期向好，指数化投资发展及相关政策推动市场发展，但需关注个股风险。",
+      "confidence_index": 0.75
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-26",
+          "score": 0.8,
+          "key_events": [
+            {
+              "title": "指数化利好",
+              "description": "证监会发布指数化投资发展行动方案"
+            },
+            {
+              "title": "美团合作",
+              "description": "美年健康与美团达成战略合作"
+            }
+          ]
+        },
+        {
+          "date": "2025-01-25",
+          "score": 0.5,
+          "key_events": [
+            {
+              "title": "川企分红",
+              "description": "多家川企派发“春节红包”，总额超120亿元"
+            },
+            {
+              "title": "川投投产",
+              "description": "川投能源银江水电站2号机组投产发电"
+            }
+          ]
+        },
+        {
+          "date": "2025-01-24",
+          "score": -0.2,
+          "key_events": [
+            {
+              "title": "公司亏损",
+              "description": "瀚川智能、醋化股份预计2024年亏损"
+            }
+          ]
+        },
+        {
+          "date": "2025-01-23",
+          "score": 0.4,
+          "key_events": [
+            {
+              "title": "川能增持",
+              "description": "川能动力控股股东增持1851万股"
+            }
+          ]
+        }
+      ],
+      "trend_prediction": "短期内市场情绪保持乐观，但需关注个股风险和政策变化。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.5,
+        "summary": "多家公司积极推进国际化、智能化、绿色化发展，并取得了一定的成果，但也有部分公司面临亏损的挑战。美年健康与美团的战略合作也为公司发展带来新的机遇。",
+        "key_points": [
+          "美年健康与美团合作",
+          "通用股份国际化布局",
+          "海底捞探索新赛道"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.1,
+        "summary": "通用股份业绩预增显著，但瀚川智能和醋化股份预计亏损，川企分红总额超过120亿元。",
+        "key_points": [
+          "通用股份业绩预增",
+          "瀚川智能亏损",
+          "醋化股份亏损",
+          "川企分红"
+        ]
+      },
+      "market_competition": {
+        "score": 0.2,
+        "summary": "海底捞进入川湘菜赛道，市场竞争激烈。",
+        "key_points": [
+          "海底捞新赛道竞争"
+        ]
+      },
+      "product_technology": {
+        "score": 0.4,
+        "summary": "美年健康和美团将利用AI算法精准推荐等技术，通用股份在海外打造智能化样板工厂，川恒股份获得专利证书。",
+        "key_points": [
+          "AI算法应用",
+          "智能化工厂",
+          "专利获得"
+        ]
+      },
+      "industry_policy": {
+        "score": 0.8,
+        "summary": "证监会推动指数化投资高质量发展，并稳步推进双向开放，利好资本市场。",
+        "key_points": [
+          "指数化投资政策"
+        ]
+      },
+      "capital_market": {
+        "score": 0.7,
+        "summary": "证监会政策利好指数化投资，吸引外资，促进资本市场发展；部分公司股票出现异常波动。",
+        "key_points": [
+          "指数化投资发展",
+          "ETF互联互通",
+          "股票波动"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.7,
+        "summary": "主流媒体报道较为客观，涵盖了市场各方面信息。"
+      },
+      "industry_media": {
+        "score": 0.6,
+        "summary": "行业媒体关注行业动态和公司经营状况。"
+      },
+      "self_media": {
+        "score": 0.4,
+        "summary": "自媒体信息相对较少，可信度有待考量。"
+      },
+      "official_announcement": {
+        "score": 0.9,
+        "summary": "官方公告信息可靠性最高，具有权威性。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.6,
+        "duration": "短期",
+        "key_factors": [
+          "证监会政策",
+          "公司业绩",
+          "市场情绪"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "个股风险",
+          "description": "部分公司业绩亏损，存在经营风险。",
+          "severity": "中"
+        },
+        {
+          "factor": "市场波动",
+          "description": "市场情绪波动可能导致股价波动。",
+          "severity": "低"
+        }
+      ]
+    }
+  }
+}

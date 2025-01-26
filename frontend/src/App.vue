@@ -40,17 +40,21 @@ const confidenceIndex = computed(() => {
 const sentimentType = computed(() => {
   const score = sentimentScore.value
   console.log('[App] Computing sentiment type for score:', score)
-  if (score > 0.5) return 'success'
-  if (score > 0) return ''
-  if (score > -0.5) return 'warning'
+  if (score >= 0.9) return 'success'
+  if (score >= 0.7) return 'success'
+  if (score >= 0.5) return ''
+  if (score >= 0.3) return 'warning'
+  if (score >= 0.1) return 'warning'
   return 'danger'
 })
 
 const sentimentLabel = computed(() => {
   const score = store.analysisData?.analysis_summary?.overall_score || 0
-  if (score > 0.5) return '极度正面'
-  if (score > 0) return '偏正面'
-  if (score > -0.5) return '偏负面'
+  if (score >= 0.9) return '极度正面'
+  if (score >= 0.7) return '正面'
+  if (score >= 0.5) return '偏正面'
+  if (score >= 0.3) return '负面'
+  if (score >= 0.1) return '偏负面'
   return '极度负面'
 })
 

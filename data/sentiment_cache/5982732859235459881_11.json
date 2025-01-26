@@ -1,0 +1,163 @@
+{
+  "date": "2025-01-26",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.4,
+      "label": "中性",
+      "summary": "盘古智能近期经历了股份解禁和高管减持，但公司基本面信息有限，难以判断其长期发展前景。市场情绪较为谨慎，需持续关注公司后续公告和市场表现。",
+      "market_expectation": "谨慎观望，关注后续发展",
+      "confidence_index": 0.65
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2024-11-22",
+          "score": 0.5,
+          "key_events": []
+        },
+        {
+          "date": "2024-11-25",
+          "score": 0.5,
+          "key_events": [
+            {
+              "title": "股东大会",
+              "description": "公司将于12月11日召开股东大会"
+            }
+          ]
+        },
+        {
+          "date": "2024-12-04",
+          "score": 0.6,
+          "key_events": []
+        },
+        {
+          "date": "2024-12-06",
+          "score": 0.5,
+          "key_events": [
+            {
+              "title": "董事会会议",
+              "description": "公司召开董事会会议，审议激励计划"
+            }
+          ]
+        },
+        {
+          "date": "2025-01-09",
+          "score": 0.3,
+          "key_events": [
+            {
+              "title": "股份解禁",
+              "description": "894万股限售股份解除限售"
+            }
+          ]
+        },
+        {
+          "date": "2025-01-16",
+          "score": 0.2,
+          "key_events": [
+            {
+              "title": "减持公告",
+              "description": "股东减持约149万股股份"
+            }
+          ]
+        },
+        {
+          "date": "2025-01-17",
+          "score": 0.2,
+          "key_events": [
+            {
+              "title": "减持计划",
+              "description": "新柴股份等多家公司高管计划减持"
+            }
+          ]
+        }
+      ],
+      "trend_prediction": "短期内市场情绪偏负面，受限售股解禁和减持计划影响。长期走势取决于公司业绩和行业发展。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.4,
+        "summary": "新闻中涉及公司董事会会议、股东大会等，反映公司正常运营，但缺乏具体经营细节信息。",
+        "key_points": [
+          "董事会会议",
+          "股东大会",
+          "激励计划"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.2,
+        "summary": "缺乏财务数据，无法对财务表现进行评估。",
+        "key_points": []
+      },
+      "market_competition": {
+        "score": 0.3,
+        "summary": "新闻中提及工业母机概念股的涨跌，反映市场竞争环境，但未涉及盘古智能的具体竞争情况。",
+        "key_points": [
+          "工业母机概念股涨跌"
+        ]
+      },
+      "product_technology": {
+        "score": 0.1,
+        "summary": "新闻中未涉及公司产品技术相关信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.1,
+        "summary": "新闻中未涉及行业政策相关信息。",
+        "key_points": []
+      },
+      "capital_market": {
+        "score": 0.7,
+        "summary": "新闻主要关注公司股份解禁、高管减持等资本市场动态，反映市场对公司投资情绪的转变。",
+        "key_points": [
+          "股份解禁",
+          "高管减持",
+          "融资余额"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.7,
+        "summary": "界面新闻、每日经济新闻等主流媒体报道了公司减持和股份解禁等信息。"
+      },
+      "industry_media": {
+        "score": 0.6,
+        "summary": "财中社报道了公司股份解禁信息。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "无自媒体信息。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "公司官方公告发布了股份解禁、减持等重要信息。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.5,
+        "duration": "短期",
+        "key_factors": [
+          "股份解禁",
+          "高管减持"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "股份解禁",
+          "description": "大量股份解禁可能导致股价下跌",
+          "severity": "中"
+        },
+        {
+          "factor": "高管减持",
+          "description": "高管减持可能引发市场担忧",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}

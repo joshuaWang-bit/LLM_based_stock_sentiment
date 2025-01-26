@@ -40,8 +40,7 @@ async def search_stocks(query: str) -> List[Dict]:
 async def get_stock_analysis(
     stock_code: str,
     days: int = Config.DEFAULT_DAYS,
-    max_news: int = Config.MAX_NEWS_PER_STOCK,
-    sentiment_news: int = Config.MAX_NEWS_FOR_SENTIMENT
+    max_news: int = Config.MAX_NEWS_PER_STOCK
 ) -> Dict:
     """获取股票新闻分析结果
 
@@ -49,7 +48,6 @@ async def get_stock_analysis(
         stock_code: 股票代码
         days: 获取最近几天的新闻，默认7天
         max_news: 最大新闻条数，默认20条
-        sentiment_news: 用于情感分析的新闻条数，默认20条
 
     Returns:
         Dict: 分析结果，包含:
@@ -76,8 +74,7 @@ async def get_stock_analysis(
 
         # 分析情感
         analysis_result = await sentiment_analyzer.analyze_sentiment(
-            news_list=news_list,
-            max_news=sentiment_news
+            news_list=news_list
         )
 
         return {

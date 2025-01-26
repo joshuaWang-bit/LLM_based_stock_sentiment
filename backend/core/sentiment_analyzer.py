@@ -144,9 +144,11 @@ class SentimentAnalyzer:
             title_negative = sum(
                 1 for word in self.negative_keywords if word in title)
 
-            score = (positive_count + title_positive * 2 -
-                     negative_count - title_negative * 2) / 10
-            score = max(-1.0, min(1.0, score))  # 限制在-1到1之间
+            # 计算得分并归一化到0-1范围
+            raw_score = (positive_count + title_positive * 2 -
+                         negative_count - title_negative * 2) / 10
+            score = (raw_score + 1) / 2  # 将-1到1的范围转换为0到1
+            score = max(0.0, min(1.0, score))  # 限制在0到1之间
             total_score += score
 
             # 收集风险因素
@@ -155,20 +157,21 @@ class SentimentAnalyzer:
                     risk_factors.append({
                         "factor": word,
                         "description": f"新闻中提到{word}相关内容，需要关注",
-                        "severity": "高" if score < -0.5 else "中" if score < 0 else "低"
+                        "severity": "高" if score < 0.2 else "中" if score < 0.5 else "低"
                     })
 
         # 计算平均得分
-        avg_score = total_score / len(news_list) if news_list else 0.0
+        avg_score = total_score / \
+            len(news_list) if news_list else 0.5  # 默认为中性0.5
 
         # 确定情感标签
-        if avg_score >= 0.7:
+        if avg_score >= 0.85:
             label = "极度看好"
-        elif avg_score >= 0.3:
+        elif avg_score >= 0.65:
             label = "看好"
-        elif avg_score >= -0.3:
+        elif avg_score >= 0.35:
             label = "中性"
-        elif avg_score >= -0.7:
+        elif avg_score >= 0.15:
             label = "看空"
         else:
             label = "极度看空"
@@ -198,15 +201,16 @@ class SentimentAnalyzer:
                 "official_announcement": {"score": avg_score, "summary": "基于关键词分析"}
             },
             "impact_analysis": {
-                "importance_level": "高" if abs(avg_score) > 0.7 else "中" if abs(avg_score) > 0.3 else "低",
+                "importance_level": "高" if avg_score > 0.8 or avg_score < 0.2 else "中" if avg_score > 0.65 or avg_score < 0.35 else "低",
                 "market_impact": {
-                    "score": abs(avg_score),
+                    # 将0-1范围的偏离中性程度转换为0-1的影响力
+                    "score": abs(avg_score - 0.5) * 2,
                     "duration": "短期",
                     "key_factors": []
                 }
             },
             "risk_analysis": {
-                "risk_level": "高" if avg_score < -0.3 else "中" if avg_score < 0.3 else "低",
+                "risk_level": "高" if avg_score < 0.35 else "中" if avg_score < 0.65 else "低",
                 "risk_factors": risk_factors[:3]  # 最多返回3个风险因素
             }
         }
@@ -214,18 +218,16 @@ class SentimentAnalyzer:
     async def analyze_sentiment(
         self,
         news_list: List[Dict],
-        max_news: int = Config.MAX_NEWS_FOR_SENTIMENT
     ) -> Dict:
         """分析新闻情感
 
         Args:
             news_list: 新闻列表
-            max_news: 用于分析的最大新闻数量
 
         Returns:
             Dict: 情感分析结果，包含多维度分析
         """
-        print(f"开始情感分析，新闻数量: {len(news_list)}, 最大分析数量: {max_news}")
+        print(f"开始情感分析，新闻数量: {len(news_list)}")
 
         if not news_list:
             print("没有新闻数据可供分析")
@@ -238,17 +240,18 @@ class SentimentAnalyzer:
                 }
             }, [])
 
-        # 只分析最新的n条新闻
+        # 按时间排序新闻
         news_to_analyze = sorted(
             news_list,
             key=lambda x: x['publish_time'],
             reverse=True
-        )[:max_news]
+        )
 
-        print(f"将分析最新的 {len(news_to_analyze)} 条新闻")
+        print(f"将分析 {len(news_to_analyze)} 条新闻")
 
         # 尝试加载缓存
-        cached_result = self._load_from_cache(news_to_analyze, max_news)
+        cached_result = self._load_from_cache(
+            news_to_analyze, len(news_to_analyze))
         if cached_result is not None:
             print("使用缓存的分析结果")
             return self._format_response(cached_result, news_to_analyze)
@@ -279,7 +282,8 @@ class SentimentAnalyzer:
 
                 # 保存缓存
                 print("正在保存分析结果到缓存...")
-                self._save_to_cache(news_to_analyze, max_news, analysis_result)
+                self._save_to_cache(news_to_analyze, len(
+                    news_to_analyze), analysis_result)
             except Exception as e:
                 print(f"Gemini API分析失败，详细错误: {str(e)}")
                 print("使用关键词分析作为备选方案")

@@ -102,7 +102,7 @@ const normalizedScore = computed(() => {
     valid: !isNaN(value),
     type: typeof props.score
   })
-  // 将0-1范围转换为-1到1范围
+  // 直接使用0-1范围的分数，转换为-1到1用于显示
   const normalizedValue = isNaN(value) ? 0 : (value * 2 - 1)
   console.log('[MainGauge] Final normalized score:', normalizedValue)
   return Math.max(-1, Math.min(1, normalizedValue))
@@ -179,11 +179,12 @@ const chartOption = computed(() => {
           lineStyle: {
             width: 6,
             color: [
-              [-0.75, '#FF3860'],  // 极度负面
-              [-0.25, '#FF9F43'],  // 偏负面
-              [0.25, '#FFD700'],   // 中性
-              [0.75, '#39FF14'],   // 偏正面
-              [1, '#00F0FF']       // 极度正面
+              [0.1, '#FF3860'],   // 极度负面 (<0.1)
+              [0.3, '#FF9F43'],   // 偏负面 (0.1-0.3)
+              [0.5, '#FFD700'],   // 负面 (0.3-0.5)
+              [0.7, '#90EE90'],   // 偏正面 (0.5-0.7)
+              [0.9, '#39FF14'],   // 正面 (0.7-0.9)
+              [1, '#00F0FF']      // 极度正面 (>0.9)
             ]
           }
         },
@@ -364,11 +365,12 @@ const confidenceChartOption = computed(() => {
 
 // Add sentiment type computed property
 const sentimentType = computed(() => {
-  const score = normalizedScore.value
-  if (score >= 0.7) return '极度正面'
-  if (score >= 0.3) return '正面'
-  if (score >= -0.3) return '中性'
-  if (score >= -0.7) return '负面'
+  const score = props.score // 直接使用原始分数 (0-1范围)
+  if (score >= 0.9) return '极度正面'
+  if (score >= 0.7) return '正面'
+  if (score >= 0.5) return '偏正面'
+  if (score >= 0.3) return '负面'
+  if (score >= 0.1) return '偏负面'
   return '极度负面'
 })
 </script>
