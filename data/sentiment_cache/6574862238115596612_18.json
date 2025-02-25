@@ -1,0 +1,143 @@
+{
+  "date": "2025-02-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.6,
+      "label": "看好",
+      "summary": "嘉友国际积极进行资金管理和业务拓展，申请巨额授信，并拓展中蒙边境贸易物流业务，显示公司发展态势良好，但短期均线死叉提示存在一定风险。",
+      "market_expectation": "市场对嘉友国际的长期发展持乐观态度，但短期内股价波动可能较大。",
+      "investor_sentiment": 60,
+      "confidence_index": 0.85
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-02-06",
+          "score": 0.4,
+          "key_events": [
+            {
+              "title": "死叉出现",
+              "description": "短期均线死叉，提示短期风险"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-07",
+          "score": 0.7,
+          "key_events": [
+            {
+              "title": "股东大会",
+              "description": "补充流动资金，增强发展信心"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-20",
+          "score": 0.9,
+          "key_events": [
+            {
+              "title": "董事会会议",
+              "description": "申请15亿授信，现金管理计划"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-24",
+          "score": 0.8,
+          "key_events": [
+            {
+              "title": "业务进展",
+              "description": "中蒙物流业务进展顺利"
+            }
+          ]
+        }
+      ],
+      "trend_prediction": "短期内股价可能波动，但长期发展潜力较大，需关注市场风险。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.8,
+        "summary": "公司积极拓展中蒙边境贸易物流业务，并加强资金管理，显示公司经营状况良好，积极进取。",
+        "key_points": [
+          "中蒙边境物流业务",
+          "全资子公司运营保税仓库"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.7,
+        "summary": "公司申请15亿元授信，并进行现金管理，显示公司对资金的合理规划和积极的财务策略。",
+        "key_points": [
+          "15亿授信申请",
+          "闲置资金现金管理"
+        ]
+      },
+      "market_competition": {
+        "score": 0.5,
+        "summary": "新闻未提及具体的市场竞争信息，但公司积极拓展业务，显示其在市场竞争中保持一定的活力。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.0,
+        "summary": "新闻未提及公司产品或技术相关信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.0,
+        "summary": "新闻未提及行业政策相关信息。",
+        "key_points": []
+      },
+      "capital_market": {
+        "score": 0.7,
+        "summary": "公司积极融资，并被多家基金公司重仓持有，显示资本市场对其发展前景的认可。",
+        "key_points": [
+          "多家基金重仓持有",
+          "15亿授信申请"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.9,
+        "summary": "主流媒体报道客观，内容多为公司公告和市场动态。"
+      },
+      "industry_media": {
+        "score": 0.8,
+        "summary": "行业媒体报道较为专业，对公司发展前景进行分析。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "无自媒体相关信息。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "官方公告信息准确可靠，是分析的重要依据。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.6,
+        "duration": "短期至中期",
+        "key_factors": [
+          "资金状况改善",
+          "业务拓展"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "短期均线死叉",
+          "description": "技术指标显示短期股价存在下跌风险",
+          "severity": "中"
+        },
+        {
+          "factor": "宏观经济环境",
+          "description": "全球经济下行压力可能影响公司业务",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}

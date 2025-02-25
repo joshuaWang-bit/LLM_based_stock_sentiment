@@ -4,11 +4,27 @@
 
 ## 功能特点
 
-- 支持股票名称和代码搜索
-- 获取近 7 天的相关新闻
-- 使用 Gemini API 进行情感分析
-- 数据缓存优化
-- 响应式界面设计
+### 数据获取与处理
+
+- 实时股票搜索：支持按股票代码或名称快速检索
+- 智能新闻爬取：自动获取近 7 天相关新闻，支持多源数据采集
+- 大模型情感分析：使用 Gemini API 进行新闻情感倾向分析，提供深度洞察
+
+### 性能优化
+
+- 多级缓存机制：
+  - 股票基础信息缓存
+  - 新闻数据本地缓存
+  - 情感分析结果缓存
+
+### 可视化与交互
+
+- 多维度数据展示：
+  - 情感趋势图表
+  - 新闻时间分布
+  - 关键信息提取
+- 响应式界面设计：支持多设备访问
+- 交互式数据筛选
 
 ## 后端 API
 
@@ -33,32 +49,57 @@ pip install -r requirements.txt
 ```
 
 3. 配置环境变量
-   创建.env 文件，添加以下配置：
+   复制 .env.example 文件并重命名为 .env，然后修改配置：
 
-```
-GEMINI_API_KEY=your_api_key
+```bash
+# 复制环境变量模板
+cp .env.example .env
+
+# 编辑 .env 文件，修改以下配置
+GEMINI_API_KEY=your_api_key  # 替换为你的 Gemini API 密钥
 GEMINI_MODEL=gemini-1.5-flash
 ```
 
 4. 运行后端服务
 
 ```bash
+# 激活虚拟环境
+.venv\Scripts\activate
+
+# 进入后端目录
 cd backend
+
+# 启动后端服务
 uvicorn main:app --reload
 ```
 
-### API 接口
+## 前端
 
-1. 股票搜索
+### 启动步骤
 
-```
-GET /api/stocks/search?query={查询词}
-```
+1. 进入前端目录
 
-2. 股票新闻分析
-
-```
-GET /api/stock-analysis/{stock_code}?days=7&max_news=20&sentiment_news=5
+```bash
+cd frontend
 ```
 
-## 前端开发中...
+2. 安装依赖
+
+```bash
+npm install
+```
+
+3. 启动开发服务器
+
+```bash
+npm run dev
+```
+
+4. 在浏览器中访问终端输出的地址（通常是 http://localhost:5173）
+
+## 使用说明
+
+1. 启动后端和前端服务
+2. 在浏览器中访问前端地址
+3. 在搜索框中直接输入股票代码（如：000001）
+4. 等待系统分析完成，查看股票相关新闻的情感分析结果

@@ -25,6 +25,8 @@ class Config:
         'data' / 'news_cache'
     SENTIMENT_CACHE_DIR = Path(
         __file__).parent.parent.parent / 'data' / 'sentiment_cache'
+    STOCKS_CACHE_DIR = Path(__file__).parent.parent.parent / \
+        'data' / 'stocks_cache'
 
     # News topics for analysis
     NEWS_TOPICS: Dict[str, str] = {

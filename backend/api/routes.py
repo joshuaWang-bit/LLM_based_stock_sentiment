@@ -3,11 +3,13 @@ from typing import List, Dict
 import akshare as ak
 from core.news_crawler import NewsCrawler
 from core.sentiment_analyzer import SentimentAnalyzer
+from core.stock_cache import StockCache
 from utils.config import Config
 
 router = APIRouter()
 news_crawler = NewsCrawler()
 sentiment_analyzer = SentimentAnalyzer()
+stock_cache = StockCache()
 
 
 @router.get("/stocks/search")
@@ -21,17 +23,25 @@ async def search_stocks(query: str) -> List[Dict]:
         List[Dict]: 股票列表，包含代码和名称
     """
     try:
-        # 使用akshare获取股票列表
-        stock_df = ak.stock_info_a_code_name()
-        # 过滤匹配的股票
-        matched_stocks = stock_df[
-            stock_df['name'].str.contains(query) |
-            stock_df['code'].str.contains(query)
-        ]
-        return [
-            {"code": row['code'], "name": row['name']}
-            for _, row in matched_stocks.iterrows()
-        ]
+        # 使用缓存获取股票数据
+        def fetch_stocks(q: str) -> Dict:
+            # 使用akshare获取股票列表
+            stock_df = ak.stock_info_a_code_name()
+            # 过滤匹配的股票
+            matched_stocks = stock_df[
+                stock_df['name'].str.contains(q) |
+                stock_df['code'].str.contains(q)
+            ]
+            return {
+                'stocks': [
+                    {"code": row['code'], "name": row['name']}
+                    for _, row in matched_stocks.iterrows()
+                ]
+            }
+        
+        # 从缓存获取或重新获取股票数据
+        result = stock_cache.get_stocks(query, lambda q: fetch_stocks(q))
+        return result['stocks']
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

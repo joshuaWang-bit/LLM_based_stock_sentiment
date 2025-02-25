@@ -42,14 +42,23 @@ class NewsCrawler:
     def _save_cache(self, stock_code: str, news_list: List[Dict]):
         """保存新闻数据到缓存"""
         try:
+            # 确保缓存目录存在
+            self.cache_dir.mkdir(parents=True, exist_ok=True)
+            
             cache_data = {
                 'date': datetime.now().strftime('%Y-%m-%d'),
                 'news': news_list
             }
-            with open(self._get_cache_path(stock_code), 'w', encoding='utf-8') as f:
+            
+            cache_path = self._get_cache_path(stock_code)
+            # 确保父目录存在
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            with open(cache_path, 'w', encoding='utf-8') as f:
                 json.dump(cache_data, f, ensure_ascii=False, indent=2)
         except Exception as e:
             print(f"保存新闻缓存出错: {e}")
+
 
     def get_stock_news(
         self,
