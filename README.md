@@ -33,7 +33,7 @@
 ### 环境要求
 
 - Python 3.8+
-- 依赖包：见 requirements.txt
+- Poetry 包管理工具
 
 ### 安装步骤
 
@@ -47,7 +47,9 @@ cd [项目目录]
 2. 安装依赖
 
 ```bash
-pip install -r requirements.txt
+
+# 使用 Poetry 安装项目依赖
+poetry install
 ```
 
 3. 配置环境变量
@@ -97,7 +99,7 @@ npm install
 npm run dev
 ```
 
-4. 在浏览器中访问终端输出的地址（通常是 http://localhost:5173）
+4. 在浏览器中访问终端输出的地址（通常是 http://localhost: ****）
 
 ## 使用说明
 
