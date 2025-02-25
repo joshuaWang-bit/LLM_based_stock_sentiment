@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Dict, Optional
 import akshare as ak
-from backend.utils.config import Config
+from utils.config import Config
 from collections import defaultdict
 
 

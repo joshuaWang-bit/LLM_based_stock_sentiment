@@ -4,8 +4,8 @@ import asyncio
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Dict, Optional
-from backend.utils.config import Config
-from backend.utils.gemini_utils import GeminiClient
+from utils.config import Config
+from utils.gemini_utils import GeminiClient
 import math
 
 

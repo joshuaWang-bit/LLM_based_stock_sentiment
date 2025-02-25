@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException
 from typing import List, Dict
 import akshare as ak
-from backend.core.news_crawler import NewsCrawler
-from backend.core.sentiment_analyzer import SentimentAnalyzer
-from backend.utils.config import Config
+from core.news_crawler import NewsCrawler
+from core.sentiment_analyzer import SentimentAnalyzer
+from utils.config import Config
 
 router = APIRouter()
 news_crawler = NewsCrawler()
