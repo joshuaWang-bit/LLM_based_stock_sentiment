@@ -1,0 +1,186 @@
+{
+  "date": "2025-02-25",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.3,
+      "label": "中性",
+      "summary": "高斯贝尔近期股价波动较大，受到DeepSeek概念和东数西算概念的影响，但公司自身并未明确受益于AI概念。市场情绪较为谨慎，投资者需密切关注公司基本面和行业动态。",
+      "market_expectation": "谨慎观望",
+      "investor_sentiment": 50,
+      "confidence_index": 0.7
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-01-27",
+          "score": 0.2,
+          "key_events": [
+            {
+              "title": "股价异动",
+              "description": "高斯贝尔股票交易异常波动公告"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-05",
+          "score": 0.4,
+          "key_events": [
+            {
+              "title": "股价上涨",
+              "description": "高斯贝尔股价上涨7.10%"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-17",
+          "score": 0.6,
+          "key_events": [
+            {
+              "title": "涨停",
+              "description": "高斯贝尔股价涨停"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-18",
+          "score": 0.5,
+          "key_events": [
+            {
+              "title": "大换手",
+              "description": "高斯贝尔筹码大换手"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-19",
+          "score": 0.3,
+          "key_events": [
+            {
+              "title": "股价下跌",
+              "description": "高斯贝尔股价下跌3.56%"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-21",
+          "score": 0.4,
+          "key_events": [
+            {
+              "title": "概念上涨",
+              "description": "东数西算概念上涨"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-25",
+          "score": 0.3,
+          "key_events": [
+            {
+              "title": "AI业务",
+              "description": "高斯贝尔否认接入DeepSeek"
+            }
+          ]
+        }
+      ],
+      "trend_prediction": "短期内股价波动可能继续，长期走势取决于公司基本面和行业发展。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.4,
+        "summary": "高斯贝尔主要从事数字电视软硬件产品和新材料研发，近期AI业务受关注，但公司表示目前未接入DeepSeek模型。",
+        "key_points": [
+          "数字电视",
+          "新材料",
+          "AI业务"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.3,
+        "summary": "新闻中提及高斯贝尔近两年股价累计下跌41%，以及一些交易数据，但缺乏详细的财务报表信息。",
+        "key_points": [
+          "股价下跌",
+          "两融数据"
+        ]
+      },
+      "market_competition": {
+        "score": 0.2,
+        "summary": "新闻中提及一些与高斯贝尔同行业公司，如TCL智家、格力电器，但缺乏具体的市场竞争分析。",
+        "key_points": [
+          "TCL智家",
+          "格力电器"
+        ]
+      },
+      "product_technology": {
+        "score": 0.3,
+        "summary": "新闻中提及高斯贝尔的数字电视软硬件产品和新材料，以及AI业务相关信息，但缺乏具体的技术细节。",
+        "key_points": [
+          "数字电视软硬件",
+          "新材料",
+          "AI"
+        ]
+      },
+      "industry_policy": {
+        "score": 0.2,
+        "summary": "新闻涉及“东数西算”概念，暗示政策对算力行业的影响，但对高斯贝尔的影响程度不明确。",
+        "key_points": [
+          "东数西算"
+        ]
+      },
+      "capital_market": {
+        "score": 0.6,
+        "summary": "新闻主要关注高斯贝尔的股价波动、交易量变化、融资融券数据以及投资者情绪，体现了资本市场对该公司的关注。",
+        "key_points": [
+          "股价波动",
+          "交易量",
+          "融资融券",
+          "投资者情绪"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.8,
+        "summary": "来自第一财经和证券时报网等主流媒体的报道，可信度较高。"
+      },
+      "industry_media": {
+        "score": 0.0,
+        "summary": "无行业媒体报道。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "无自媒体报道。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "高斯贝尔发布的股票交易异常波动公告，信息可靠性最高。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.5,
+        "duration": "短期",
+        "key_factors": [
+          "股价波动",
+          "概念炒作",
+          "公司基本面"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "股价波动",
+          "description": "高斯贝尔股价近期波动较大，存在投资风险。",
+          "severity": "中"
+        },
+        {
+          "factor": "概念炒作",
+          "description": "公司股价受概念影响较大，存在被高估的风险。",
+          "severity": "中"
+        }
+      ]
+    }
+  }
+}
