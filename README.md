@@ -28,6 +28,23 @@
 - 响应式界面设计：支持多设备访问
 - 交互式数据筛选
 
+## 技术栈
+
+### 后端
+
+- FastAPI：高性能 Python Web 框架
+- SQLite：轻量级数据库
+- Gemini API：Google AI 大语言模型
+- Poetry：Python 依赖管理
+
+### 前端
+
+- Vue 3：渐进式 JavaScript 框架
+- Element Plus：UI 组件库
+- ECharts：数据可视化图表
+- Vite：现代前端构建工具
+- Tailwind CSS：原子化 CSS 框架
+
 ## 后端 API
 
 ### 环境要求
@@ -99,7 +116,7 @@ npm install
 npm run dev
 ```
 
-4. 在浏览器中访问终端输出的地址（通常是 http://localhost: ****）
+4. 在浏览器中访问终端输出的地址（通常是 http://localhost: \*\*\*\*）
 
 ## 使用说明
 
