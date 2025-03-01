@@ -4,7 +4,6 @@ import { Search, Refresh, Setting, Close, Monitor, InfoFilled } from '@element-p
 import { useStockStore } from './stores/stockStore'
 import MainGauge from './components/SentimentDashboard/MainGauge.vue'
 import TrendAnalysis from './components/TrendAnalysis/TrendAnalysis.vue'
-import TopicAnalysis from './components/TopicAnalysis/TopicAnalysis.vue'
 
 // 状态
 const searchQuery = ref('')
@@ -77,9 +76,6 @@ const investorSentimentColor = computed(() => {
 
 // 趋势分析数据
 const timeAnalysis = computed(() => store.analysisData?.time_analysis || {})
-
-// 主题分析数据
-const topicAnalysis = computed(() => store.analysisData?.topic_analysis || {})
 
 // 方法
 const handleSearch = async (query, cb) => {
@@ -256,10 +252,7 @@ const formatInvestorSentiment = () => {
           <div v-if="store.loading" class="flex justify-center items-center h-64">
             <el-loading />
           </div>
-          <template v-else>
-            <TopicAnalysis :topic-analysis="topicAnalysis" :show-details="showTopicDetails"
-              @close-details="showTopicDetails = false" />
-          </template>
+          <!-- 这里将添加主题分析组件 -->
         </div>
       </div>
 
