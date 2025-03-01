@@ -60,3 +60,9 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
+
+# data
+data/
+
+# docs
+docs/
