@@ -1,0 +1,143 @@
+{
+  "date": "2025-03-01",
+  "analysis_result": {
+    "overall_sentiment": {
+      "score": 0.6,
+      "label": "看好",
+      "summary": "嘉友国际积极进行资金管理和业务拓展，申请15亿综合授信，并利用全资子公司拓展中蒙边境保税物流业务，展现积极发展态势。短期均线死叉提示风险，但长期来看发展前景较好。",
+      "market_expectation": "市场预期嘉友国际的资金实力和业务发展将得到提升，但需关注短期市场波动风险。",
+      "investor_sentiment": 60,
+      "confidence_index": 0.85
+    },
+    "time_analysis": {
+      "trend": [
+        {
+          "date": "2025-02-06",
+          "score": 0.4,
+          "key_events": [
+            {
+              "title": "死叉警告",
+              "description": "短期均线死叉，提示短期风险"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-07",
+          "score": 0.7,
+          "key_events": [
+            {
+              "title": "股东大会",
+              "description": "补充流动资金，增强公司资金实力"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-20",
+          "score": 0.9,
+          "key_events": [
+            {
+              "title": "董事会会议",
+              "description": "申请15亿授信，现金管理"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-24",
+          "score": 0.7,
+          "key_events": [
+            {
+              "title": "业务拓展",
+              "description": "中蒙边境保税物流业务进展"
+            }
+          ]
+        }
+      ],
+      "trend_prediction": "短期可能受市场波动影响，但长期来看，积极的资金运作和业务拓展将推动公司发展。"
+    },
+    "topic_analysis": {
+      "company_operation": {
+        "score": 0.8,
+        "summary": "嘉友国际积极拓展中蒙边境保税物流业务，提升公司盈利能力。",
+        "key_points": [
+          "中蒙边境保税物流业务",
+          "全资子公司运营"
+        ]
+      },
+      "financial_performance": {
+        "score": 0.7,
+        "summary": "公司申请15亿综合授信，并进行现金管理，增强资金实力，缓解资金压力。",
+        "key_points": [
+          "15亿综合授信申请",
+          "现金管理策略"
+        ]
+      },
+      "market_competition": {
+        "score": 0.5,
+        "summary": "新闻未直接提及市场竞争情况，但中蒙边境保税物流业务的拓展将提升公司竞争力。",
+        "key_points": []
+      },
+      "product_technology": {
+        "score": 0.0,
+        "summary": "新闻未涉及公司产品技术相关信息。",
+        "key_points": []
+      },
+      "industry_policy": {
+        "score": 0.5,
+        "summary": "中蒙边境贸易相关政策对公司业务发展有间接影响。",
+        "key_points": []
+      },
+      "capital_market": {
+        "score": 0.7,
+        "summary": "公司积极进行融资和资本运作，展现积极的资本市场策略。",
+        "key_points": [
+          "股票发行",
+          "融资申请"
+        ]
+      }
+    },
+    "source_analysis": {
+      "mainstream_media": {
+        "score": 0.9,
+        "summary": "主流媒体报道客观全面，增强了新闻的可信度。"
+      },
+      "industry_media": {
+        "score": 0.7,
+        "summary": "行业媒体报道关注公司财务和业务动态。"
+      },
+      "self_media": {
+        "score": 0.0,
+        "summary": "无自媒体报道。"
+      },
+      "official_announcement": {
+        "score": 1.0,
+        "summary": "公司官方公告信息准确可靠。"
+      }
+    },
+    "impact_analysis": {
+      "importance_level": "中",
+      "market_impact": {
+        "score": 0.6,
+        "duration": "短期至中期",
+        "key_factors": [
+          "资金实力提升",
+          "业务拓展"
+        ]
+      }
+    },
+    "risk_analysis": {
+      "risk_level": "中",
+      "risk_factors": [
+        {
+          "factor": "短期市场波动",
+          "description": "短期均线死叉提示市场风险",
+          "severity": "中"
+        },
+        {
+          "factor": "地缘政治风险",
+          "description": "中蒙边境贸易受地缘政治影响",
+          "severity": "低"
+        }
+      ]
+    }
+  }
+}
