@@ -86,6 +86,10 @@ cp .env.example .env
 # 编辑 .env 文件，修改以下配置
 GEMINI_API_KEY=your_api_key  # 替换为你的 Gemini API 密钥
 GEMINI_MODEL=gemini-1.5-flash
+
+# 你也可以使用 DEEPSEEK API 配置
+DEEPSEEK_API_KEY=DEEPSEEK_API_KEY
+DEEPSEEK_MODEL=deepseek-chat
 ```
 
 4. 运行后端服务

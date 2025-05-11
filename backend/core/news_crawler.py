@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Dict, Optional
 import akshare as ak
-from utils.config import Config
+from backend.utils.config import Config
 from collections import defaultdict
 
 
@@ -134,7 +134,8 @@ class NewsCrawler:
                 except Exception as e:
                     print(f"处理新闻出错: {e}")
                     continue
-
+            # 要先截取再排序，不然前面都是无关新闻
+            news_list = news_list[:max_news]
             # 按时间排序
             news_list.sort(key=lambda x: x['publish_time'], reverse=True)
 

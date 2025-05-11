@@ -15,6 +15,8 @@ class Config:
     GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', '')
     GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-1.5-flash')
 
+    DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY', '')
+    DEEPSEEK_MODEL = os.getenv('DEEPSEEK_MODEL', 'deepseek-chat')
     # News limits
     MAX_NEWS_PER_STOCK = 20  # 每个股票最大新闻数量
     DEFAULT_DAYS = 7  # 默认获取天数

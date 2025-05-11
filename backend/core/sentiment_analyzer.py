@@ -4,8 +4,9 @@ import asyncio
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Dict, Optional
-from utils.config import Config
-from utils.gemini_utils import GeminiClient
+from backend.utils.config import Config
+from backend.utils.gemini_utils import GeminiClient
+from backend.utils.openai_utils import DeepSeekClient
 import math
 
 
@@ -18,15 +19,28 @@ class SentimentAnalyzer:
         self.cache_dir = Config.SENTIMENT_CACHE_DIR
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-        # 初始化Gemini客户端
-        self.gemini_client = GeminiClient(
-            api_key=Config.GEMINI_API_KEY,
-            model=Config.GEMINI_MODEL
-        )
 
-        # 关键词配置
-        self.positive_keywords = ['利好', '增长', '突破', '创新高', '获得', '中标', '战略合作']
-        self.negative_keywords = ['下滑', '亏损', '违规', '处罚', '风险', '下跌', '减持']
+        if Config.DEEPSEEK_API_KEY:
+            # 初始化DeepSeek客户端
+            self.client = DeepSeekClient(
+                api_key=Config.DEEPSEEK_API_KEY,
+                model=Config.DEEPSEEK_MODEL
+            )
+            self.client_name = Config.DEEPSEEK_MODEL
+
+        elif Config.GEMINI_API_KEY:
+            # 初始化Gemini客户端
+            self.client = GeminiClient(
+                api_key=Config.GEMINI_API_KEY,
+                model=Config.GEMINI_MODEL
+            )
+            self.client_name = Config.GEMINI_MODEL
+        else:
+            raise ValueError("未设置Gemini或DeepSeek API密钥")
+
+            # 关键词配置
+            self.positive_keywords = ['利好', '增长', '突破', '创新高', '获得', '中标', '战略合作']
+            self.negative_keywords = ['下滑', '亏损', '违规', '处罚', '风险', '下跌', '减持']
 
     def _generate_cache_key(self, news_list: List[Dict], max_news: int) -> str:
         """生成缓存键
@@ -162,7 +176,7 @@ class SentimentAnalyzer:
 
         # 计算平均得分
         avg_score = total_score / \
-            len(news_list) if news_list else 0.5  # 默认为中性0.5
+                    len(news_list) if news_list else 0.5  # 默认为中性0.5
 
         # 确定情感标签
         if avg_score >= 0.85:
@@ -216,8 +230,8 @@ class SentimentAnalyzer:
         }
 
     async def analyze_sentiment(
-        self,
-        news_list: List[Dict],
+            self,
+            news_list: List[Dict],
     ) -> Dict:
         """分析新闻情感
 
@@ -270,25 +284,26 @@ class SentimentAnalyzer:
 
             # 使用模板构建提示词
             prompt = Config.SENTIMENT_PROMPT.format(news_content=news_content)
+            print(prompt)
             print("已构建分析提示词")
 
-            try:
-                print("开始调用 Gemini API 进行分析...")
-                # 使用GeminiClient进行分析
-                analysis_result = await self.gemini_client.analyze_sentiment(prompt)
-                print("Gemini API 分析完成，结果类型:", type(analysis_result))
-                print("分析结果:", json.dumps(
-                    analysis_result, ensure_ascii=False, indent=2))
+            #  try:
+            print(f"开始调用 {self.client_name} API 进行分析...")
+            # 使用大模型Client进行分析
+            analysis_result = await self.client.analyze_sentiment(prompt)
+            print("大模型 API 分析完成，结果类型:", type(analysis_result))
+            print("分析结果:", json.dumps(
+                analysis_result, ensure_ascii=False, indent=2))
 
-                # 保存缓存
-                print("正在保存分析结果到缓存...")
-                self._save_to_cache(news_to_analyze, len(
-                    news_to_analyze), analysis_result)
-            except Exception as e:
-                print(f"Gemini API分析失败，详细错误: {str(e)}")
-                print("使用关键词分析作为备选方案")
-                # 如果API调用失败，使用关键词分析
-                analysis_result = self._analyze_by_keywords(news_to_analyze)
+            # 保存缓存
+            print("正在保存分析结果到缓存...")
+            self._save_to_cache(news_to_analyze, len(
+                news_to_analyze), analysis_result)
+            # except Exception as e:
+            #  print(f"大模型 API分析失败，详细错误: {str(e)}")
+            #  print("使用关键词分析作为备选方案")
+            #  # 如果API调用失败，使用关键词分析
+            #  analysis_result = self._analyze_by_keywords(news_to_analyze)
 
             # 格式化响应
             print("正在格式化分析结果...")
@@ -324,9 +339,9 @@ class SentimentAnalyzer:
         # 1. 计算来源可靠性得分
         source_weights = {
             'official_announcement': 1.0,  # 官方公告
-            'mainstream_media': 0.8,       # 主流媒体
-            'industry_media': 0.6,         # 行业媒体
-            'self_media': 0.4              # 自媒体
+            'mainstream_media': 0.8,  # 主流媒体
+            'industry_media': 0.6,  # 行业媒体
+            'self_media': 0.4  # 自媒体
         }
 
         source_scores = []
@@ -378,9 +393,9 @@ class SentimentAnalyzer:
 
         # 综合计算置信度，给予不同因素不同的权重
         confidence_index = (
-            0.4 * source_reliability +  # 来源可靠性占40%
-            0.3 * timeliness +         # 时效性占30%
-            0.3 * consistency          # 一致性占30%
+                0.4 * source_reliability +  # 来源可靠性占40%
+                0.3 * timeliness +  # 时效性占30%
+                0.3 * consistency  # 一致性占30%
         )
 
         return round(confidence_index, 2)
